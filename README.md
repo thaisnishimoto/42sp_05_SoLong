@@ -32,3 +32,5 @@ MiniLibX is a library based on Xlib, which contains functions for interacting wi
 https://qst0.github.io/ft_libgfx/man_mlx_loop.html
 
 https://piiixl.itch.io/space
+https://www.aconvert.com/image/#google_vignette
+https://elliotjermy.itch.io/up940183-meteor-defence
