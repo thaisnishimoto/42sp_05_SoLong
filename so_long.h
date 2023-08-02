@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/02 15:21:42 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:53:09 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,20 @@
 #  define DELAY_FRAME 10
 # endif
 
+/*Sprites*/
+# define SPACE_PATH1 "./space_frame1.xpm"
+# define SPACE_PATH2 "./space_frame2.xpm"
+# define SPACE_PATH3 "./space_frame3.xpm"
+# define SPACE_PATH4 "./space_frame4.xpm"
+
 /*Structs*/
-typedef struct	s_map
+typedef struct	s_sprite
 {
 	void	*ptr;
-	char	*relative_path;
+	char	*path;
 	int	width;
 	int	height;
-}	t_map;
+}	t_sprite;
 
 typedef struct	s_img
 {
@@ -59,7 +65,10 @@ typedef struct s_data
 	void	*mlx_connection;
 	void	*mlx_win;
 	t_img	img;
-	t_map	map;
+	t_sprite	space1;
+	t_sprite	space2;
+	t_sprite	space3;
+	t_sprite	space4;
 }	t_data;
 
 /*Render functions*/
