@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/03 15:28:27 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/03 15:47:03 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,9 @@ int	init_sprites(t_data* data)
 	data->space4.ptr = mlx_xpm_file_to_image(data->mlx_connection, SPACE_PATH4, &data->space4.width, &data->space4.height);
 	data->asteroid.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTEROID_PATH, &data->asteroid.width, &data->asteroid.height);
 	data->astronaut.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_L, &data->astronaut.width, &data->astronaut.height);
-	printf("size of frame1: %d x %d", data->astronaut.width, data->astronaut.height);
+	data->astronaut.x = 64;
+	data->astronaut.y = 64;
+//	printf("size of frame1: %d x %d", data->astronaut.width, data->astronaut.height);
 	return (0);
 }
 
