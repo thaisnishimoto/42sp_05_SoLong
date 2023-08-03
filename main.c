@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/02 19:03:57 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/03 15:28:27 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ int	render_sqr(t_img *img, int color)
 	return (0);
 }
 
+int	render_astronaut(t_data *data)
+{
+	if (data->mlx_win == NULL)
+		return (1);
+	mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->astronaut.ptr, 64 + data->astronaut.x, 64);
+	return (0);
+}
 //int	move_sqr(t_data *data)
 //{
 //	static int	i;
@@ -72,7 +79,7 @@ int	render_space(t_data *data)
 			x = 0;
 			while (x * 64 < WIN_WIDTH)
 			{
-				if (i >= 0 & i <= DELAY_FRAME * 5)
+				if (i >= 0 && i <= DELAY_FRAME * 5)
       					mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->space1.ptr, x * 64, y * 64);
 				if (i > DELAY_FRAME * 5 && i <= DELAY_FRAME * 10)
 					mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->space2.ptr, x * 64, y * 64);
@@ -91,13 +98,37 @@ int	render_space(t_data *data)
 	return (0);
 }
 
+int	render_asteroid(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	if (data->mlx_win != NULL)
+	{
+		while (y == 0)
+		{
+			x = 0;
+			while (x * 64 < WIN_WIDTH)
+			{
+				mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->asteroid.ptr, x * 64, y * 64);
+				x++;
+			}
+			y++;
+		}
+    	}
+	return (0);
+}
+
 int     render_game(t_data *data)
 {
 	if (data->mlx_win == NULL)
 		return (1);
+	//render_sqr(&data->img, 0xFFFFFF);
 	render_space(data);
-	render_sqr(&data->img, 0xFFFFFF);
-	mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->img.mlx_img, 0, 0);
+	render_asteroid(data);
+	render_astronaut(data);
+	//mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->img.mlx_img, 64, 64);
 	return (0);
 }
 
@@ -110,22 +141,25 @@ int	x_win(t_data *data)
 
 int	key_hook(int keysym, t_data *data)
 {
-	if (keysym == XK_Escape)
+	if (keysym == XK_Right)
+		data->astronaut.x += TILE_SIZE;
+	else if (keysym == XK_Escape)
 	{
         	mlx_destroy_window(data->mlx_connection, data->mlx_win);
         	data->mlx_win = NULL;
 	}
-	printf("Key pressed: %d/n", keysym);
 	return (0);
 }
 
 int	init_sprites(t_data* data)
 {
 	data->space1.ptr = mlx_xpm_file_to_image(data->mlx_connection, SPACE_PATH1, &data->space1.width, &data->space1.height);
-//	printf("size of frame1: %d x %d", data->space1.width, data->space1.height);
 	data->space2.ptr = mlx_xpm_file_to_image(data->mlx_connection, SPACE_PATH2, &data->space2.width, &data->space2.height);
 	data->space3.ptr = mlx_xpm_file_to_image(data->mlx_connection, SPACE_PATH3, &data->space3.width, &data->space3.height);
 	data->space4.ptr = mlx_xpm_file_to_image(data->mlx_connection, SPACE_PATH4, &data->space4.width, &data->space4.height);
+	data->asteroid.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTEROID_PATH, &data->asteroid.width, &data->asteroid.height);
+	data->astronaut.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_L, &data->astronaut.width, &data->astronaut.height);
+	printf("size of frame1: %d x %d", data->astronaut.width, data->astronaut.height);
 	return (0);
 }
 
@@ -149,6 +183,8 @@ int	main(void)
 	mlx_destroy_image(data.mlx_connection, data.space2.ptr);
 	mlx_destroy_image(data.mlx_connection, data.space3.ptr);
 	mlx_destroy_image(data.mlx_connection, data.space4.ptr);
+	mlx_destroy_image(data.mlx_connection, data.asteroid.ptr);
+	mlx_destroy_image(data.mlx_connection, data.astronaut.ptr);
 	mlx_destroy_image(data.mlx_connection, data.img.mlx_img);
 	mlx_destroy_display(data.mlx_connection);
 	free(data.mlx_connection);

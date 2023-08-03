@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/02 16:53:09 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/03 15:03:36 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,19 @@
 # endif
 
 # ifndef DELAY_FRAME
-#  define DELAY_FRAME 10
+#  define DELAY_FRAME 150
 # endif
 
 /*Sprites*/
-# define SPACE_PATH1 "./space_frame1.xpm"
-# define SPACE_PATH2 "./space_frame2.xpm"
-# define SPACE_PATH3 "./space_frame3.xpm"
-# define SPACE_PATH4 "./space_frame4.xpm"
+# define SPACE_PATH1 "./images/space_frame1.xpm"
+# define SPACE_PATH2 "./images/space_frame2.xpm"
+# define SPACE_PATH3 "./images/space_frame3.xpm"
+# define SPACE_PATH4 "./images/space_frame4.xpm"
+# define ASTEROID_PATH "./images/asteroid_64.xpm"
+# define ASTRONAUT_U "./images/astronaut_back.xpm"
+# define ASTRONAUT_R "./images/astronaut_right.xpm"
+# define ASTRONAUT_L "./images/astronaut_left.xpm"
+# define ASTRONAUT_D "./images/astronaut_front.xpm"
 
 /*Structs*/
 typedef struct	s_sprite
@@ -49,6 +54,8 @@ typedef struct	s_sprite
 	char	*path;
 	int	width;
 	int	height;
+	int	x;
+	int	y;
 }	t_sprite;
 
 typedef struct	s_img
@@ -69,6 +76,8 @@ typedef struct s_data
 	t_sprite	space2;
 	t_sprite	space3;
 	t_sprite	space4;
+	t_sprite	asteroid;
+	t_sprite	astronaut;
 }	t_data;
 
 /*Render functions*/
