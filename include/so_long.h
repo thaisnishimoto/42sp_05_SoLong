@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/07 17:12:18 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:59:11 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define SPACE2 "./images/space_frame2.xpm"
 # define SPACE3 "./images/space_frame3.xpm"
 # define SPACE4 "./images/space_frame4.xpm"
-# define PORTAL "./images/portal.xpm"
+# define PORTAL "./images/portal transcendence.xpm"
 # define ASTEROID "./images/asteroid.xpm"
 # define ASTRONAUT_U "./images/astronaut_up.xpm"
 # define ASTRONAUT_R "./images/astronaut_right.xpm"
@@ -62,6 +62,13 @@ typedef struct	s_map
 	int	pos_x;
 	int	pos_y;
 }	t_map;
+
+typedef struct	s_win
+{
+	void	*mlx_win;
+	int	width;
+	int	height;
+}	t_win;
 
 typedef struct	s_sprite
 {
@@ -85,8 +92,9 @@ typedef struct	s_img
 typedef struct s_data
 {
 	void	*mlx_connection;
-	void	*mlx_win;
+	t_win	win;
 	t_img	img;
+	t_map	map;
 	t_sprite	space1;
 	t_sprite	space2;
 	t_sprite	space3;
@@ -102,7 +110,7 @@ typedef struct s_data
 /*Render functions*/
 void	render_rect(t_img *img, int color);
 void	img_pix_put(t_img *img, int x, int y, int color);
-int	render_space(t_data *data);
+int	render_space(t_data *data, int pos_x, int pos_y);
 
 /*Close window functions*/
 int	x_win(t_data *data);
