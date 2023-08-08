@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/07 17:30:14 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:46:50 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 
 int	render_astronaut(t_data *data)
 {
-	if (data->mlx_win == NULL)
+	if (data->win.mlx_win == NULL)
 		return (1);
-	mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->astronaut_d.ptr, 64, 64);
+	mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->astronaut_d.ptr, 64, 64);
 	return (0);
 }
 
@@ -66,36 +66,36 @@ int	render_astronaut(t_data *data)
 //	return (0);
 //}
 
-int	render_space(t_data *data)
+int	render_space(t_data *data, int pos_x, int pos_y)
 {
-	int	x;
-	int	y;
+//	int	x;
+//	int	y;
 	static int	i;
 
-	y = 0;
-	if (data->mlx_win != NULL)
-	{
-		while (y * 64 < WIN_HEIGHT)
-		{
-			x = 0;
-			while (x * 64 < WIN_WIDTH)
-			{
+//	y = 0;
+//	if (data->mlx_win != NULL)
+//	{
+		//while (y * 64 < WIN_HEIGHT)
+		//{
+//			x = 0;
+		//	while (x * 64 < WIN_WIDTH)
+		//	{
 				if (i >= 0 && i <= DELAY_FRAME * 5)
-      					mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->space1.ptr, x * 64, y * 64);
+      					mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->space1.ptr, pos_x * 64, pos_y * 64);
 				if (i > DELAY_FRAME * 5 && i <= DELAY_FRAME * 10)
-					mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->space2.ptr, x * 64, y * 64);
+					mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->space2.ptr, pos_x * 64, pos_y * 64);
 				if (i > DELAY_FRAME * 10 && i <= DELAY_FRAME * 15)
-					mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->space3.ptr, x * 64, y * 64);
+					mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->space3.ptr, pos_x * 64, pos_y * 64);
 				if (i > DELAY_FRAME * 15 && i <= DELAY_FRAME * 20)
-					mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->space4.ptr, x * 64, y * 64);
+					mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->space4.ptr, pos_x * 64, pos_y * 64);
 				if (i > DELAY_FRAME * 20)
 					i = 0;
 				i++;
-				x++;
-			}
-			y++;
-		}
-    	}
+		//		x++;
+		//	}
+		//	y++;
+		//}
+//    	}
 	return (0);
 }
 
@@ -105,14 +105,14 @@ int	render_asteroid(t_data *data)
 	int	y;
 
 	y = 0;
-	if (data->mlx_win != NULL)
+	if (data->win.mlx_win != NULL)
 	{
 		while (y == 0)
 		{
 			x = 0;
 			while (x * 64 < WIN_WIDTH)
 			{
-				mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->asteroid.ptr, x * 64, y * 64);
+				mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->asteroid.ptr, x * 64, y * 64);
 				x++;
 			}
 			y++;
@@ -123,11 +123,11 @@ int	render_asteroid(t_data *data)
 
 int     render_game(t_data *data)
 {
-	if (data->mlx_win == NULL)
+	if (data->win.mlx_win == NULL)
 		return (1);
 	//render_sqr(&data->img, 0xFFFFFF);
-	render_space(data);
-	render_asteroid(data);
+//	render_space(data);
+//	render_asteroid(data);
 	render_astronaut(data);
 	//mlx_put_image_to_window(data->mlx_connection, data->mlx_win, data->img.mlx_img, 64, 64);
 	return (0);
@@ -135,8 +135,8 @@ int     render_game(t_data *data)
 
 int	x_win(t_data *data)
 {
-        mlx_destroy_window(data->mlx_connection, data->mlx_win);
-        data->mlx_win = NULL;
+        mlx_destroy_window(data->mlx_connection, data->win.mlx_win);
+        data->win.mlx_win = NULL;
 	return (0);
 }
 
@@ -146,8 +146,8 @@ int	key_hook(int keysym, t_data *data)
 //		data->astronaut.x += TILE_SIZE;
 	if (keysym == XK_Escape)
 	{
-        	mlx_destroy_window(data->mlx_connection, data->mlx_win);
-        	data->mlx_win = NULL;
+        	mlx_destroy_window(data->mlx_connection, data->win.mlx_win);
+        	data->win.mlx_win = NULL;
 	}
 	return (0);
 }
@@ -159,10 +159,13 @@ int	init_sprites(t_data* data)
 	data->space3.ptr = mlx_xpm_file_to_image(data->mlx_connection, SPACE3, &data->space3.width, &data->space3.height);
 	data->space4.ptr = mlx_xpm_file_to_image(data->mlx_connection, SPACE4, &data->space4.width, &data->space4.height);
 	data->asteroid.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTEROID, &data->asteroid.width, &data->asteroid.height);
+	data->astronaut_u.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_U, &data->astronaut_u.width, &data->astronaut_u.height);
 	data->astronaut_d.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_D, &data->astronaut_d.width, &data->astronaut_d.height);
+	data->astronaut_r.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_R, &data->astronaut_r.width, &data->astronaut_r.height);
+	data->astronaut_l.ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_L, &data->astronaut_l.width, &data->astronaut_l.height);
+	data->portal.ptr = mlx_xpm_file_to_image(data->mlx_connection, PORTAL, &data->portal.width, &data->portal.height);
 //	data->astronaut.x = 64;
 //	data->astronaut.y = 64;
-//	printf("size of frame1: %d x %d", data->astronaut.width, data->astronaut.height);
 	return (0);
 }
 
@@ -178,56 +181,110 @@ void	size_map(t_map* map)
 	map->columns = ft_strlen(line) - 1;
 	while (line)
 	{
+		free(line);
 		map->rows++;
 		line = ft_get_next_line(fd);
 	}
 	close (fd);
 }
 
-void	render_map(t_map* map)
+void	size_window(t_data *data)
+{
+	data->win.width = data->map.columns * TILE_SIZE;
+	data->win.height = data->map.rows * TILE_SIZE;
+}
+
+void	read_map(t_map* map)
 {
 	int	fd;
 	int	y;
 
 	y = 0;
-	map->grid = NULL;
+	map->grid = malloc((map->rows) * sizeof(char*));
+	if (map->grid == NULL)
+		return ;
 	fd = open(map->file, O_RDWR);
 	while (y < map->rows)
 	{
 		map->grid[y] = ft_get_next_line(fd);
+		ft_printf("%s", map->grid[y]);
 		y++;
 	}
 	close (fd);
 }
 
+int	render_map(t_data *data)
+{
+	int	x;
+	int	y;
+
+	if (data->win.mlx_win == NULL)
+		return (1);
+	y = 0;
+	while (y < data->map.rows)
+	{
+		x = 0;
+		while (x < data->map.columns)
+		{
+			if (data->map.grid[y][x] == '1')
+				mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->asteroid.ptr, x * 64, y * 64);
+			if (data->map.grid[y][x] == '0')
+				render_space(data, x, y);
+			if (data->map.grid[y][x] == 'E')
+				mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->portal.ptr, x * 64, y * 64);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+void	free_map(t_map* map)
+{
+	int	y;
+
+	y = 0;
+	while (y < map->rows)
+	{
+		free(map->grid[y]);
+		y++;
+	}
+	free(map->grid);
+}
+
 int	main(int argc, char* argv[])
 {
 	t_data	data;
-	t_map	map;
 	
 	if (argc != 2)
 		ft_printf("Too many files");
-	map.file = argv[1];
+	data.map.file = argv[1];
+	size_map(&data.map);
+	size_window(&data);
+	read_map(&data.map);
 	data.mlx_connection = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx_connection, WIN_WIDTH, WIN_HEIGHT, "SO LONG");
+	data.win.mlx_win = mlx_new_window(data.mlx_connection, data.win.width, data.win.height, "SO LONG");
 	init_sprites(&data);
-	size_map(&map);
-	render_map(&map);
 //	data.img.mlx_img = mlx_new_image(data.mlx_connection, 64, 64);
 //	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
 	/*Hooks*/
-	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &key_hook, &data);
-	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, &x_win, &data);
-	mlx_loop_hook(data.mlx_connection, &render_game, &data);
+	mlx_hook(data.win.mlx_win, KeyPress, KeyPressMask, &key_hook, &data);
+	mlx_hook(data.win.mlx_win, DestroyNotify, StructureNotifyMask, &x_win, &data);
+	mlx_loop_hook(data.mlx_connection, &render_map, &data);
 
 	mlx_loop(data.mlx_connection);
 	
+	free_map(&data.map);
 	mlx_destroy_image(data.mlx_connection, data.space1.ptr);
 	mlx_destroy_image(data.mlx_connection, data.space2.ptr);
 	mlx_destroy_image(data.mlx_connection, data.space3.ptr);
 	mlx_destroy_image(data.mlx_connection, data.space4.ptr);
 	mlx_destroy_image(data.mlx_connection, data.asteroid.ptr);
+	mlx_destroy_image(data.mlx_connection, data.astronaut_u.ptr);
 	mlx_destroy_image(data.mlx_connection, data.astronaut_d.ptr);
+	mlx_destroy_image(data.mlx_connection, data.astronaut_r.ptr);
+	mlx_destroy_image(data.mlx_connection, data.astronaut_l.ptr);
+	mlx_destroy_image(data.mlx_connection, data.portal.ptr);
 //	mlx_destroy_image(data.mlx_connection, data.img.mlx_img);
 	mlx_destroy_display(data.mlx_connection);
 	free(data.mlx_connection);
