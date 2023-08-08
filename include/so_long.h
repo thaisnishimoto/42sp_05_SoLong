@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/08 15:59:11 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:02:13 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@
 # define SPACE2 "./images/space_frame2.xpm"
 # define SPACE3 "./images/space_frame3.xpm"
 # define SPACE4 "./images/space_frame4.xpm"
-# define PORTAL "./images/portal transcendence.xpm"
 # define ASTEROID "./images/asteroid.xpm"
+# define PORTAL "./images/portal transcendence.xpm"
+# define OXYGEN "./images/oxygen.xpm"
 # define ASTRONAUT_U "./images/astronaut_up.xpm"
 # define ASTRONAUT_R "./images/astronaut_right.xpm"
 # define ASTRONAUT_L "./images/astronaut_left.xpm"
@@ -99,8 +100,9 @@ typedef struct s_data
 	t_sprite	space2;
 	t_sprite	space3;
 	t_sprite	space4;
-	t_sprite	portal;
 	t_sprite	asteroid;
+	t_sprite	portal;
+	t_sprite	oxygen;
 	t_sprite	astronaut_u;
 	t_sprite	astronaut_r;
 	t_sprite	astronaut_l;
