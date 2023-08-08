@@ -6,7 +6,7 @@
 #    By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 18:56:46 by tmina-ni          #+#    #+#              #
-#    Updated: 2023/08/05 18:21:20 by tmina-ni         ###   ########.fr        #
+#    Updated: 2023/08/08 14:31:07 by tmina-ni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ run:
 #--------------------LEAKS--------------------#
 
 leak:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP_PATH)$(MAP)
 
 
 #--------------------CLEAN--------------------#
