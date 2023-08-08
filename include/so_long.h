@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/05 18:48:56 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:12:18 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@
 # define ASTRONAUT_D "./images/astronaut_down.xpm"
 
 /*Structs*/
+typedef struct	s_map
+{
+	char	*file;
+	int	columns;
+	int	rows;
+	char	**grid;
+	int	pos_x;
+	int	pos_y;
+}	t_map;
+
 typedef struct	s_sprite
 {
 	void	*ptr;

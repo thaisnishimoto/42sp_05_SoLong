@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/05 19:05:00 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:30:14 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,17 +166,36 @@ int	init_sprites(t_data* data)
 	return (0);
 }
 
-void	render_map(char* argv)
+void	size_map(t_map* map)
 {
 	int	fd;
 	char	*line;
 
-	fd = open(argv, O_RDWR);
+	map->columns = 0;
+	map->rows = 0;
+	fd = open(map->file, O_RDWR);
 	line = ft_get_next_line(fd);
+	map->columns = ft_strlen(line) - 1;
 	while (line)
 	{
-		ft_printf("%s", line);
+		map->rows++;
 		line = ft_get_next_line(fd);
+	}
+	close (fd);
+}
+
+void	render_map(t_map* map)
+{
+	int	fd;
+	int	y;
+
+	y = 0;
+	map->grid = NULL;
+	fd = open(map->file, O_RDWR);
+	while (y < map->rows)
+	{
+		map->grid[y] = ft_get_next_line(fd);
+		y++;
 	}
 	close (fd);
 }
@@ -184,13 +203,16 @@ void	render_map(char* argv)
 int	main(int argc, char* argv[])
 {
 	t_data	data;
+	t_map	map;
 	
 	if (argc != 2)
 		ft_printf("Too many files");
+	map.file = argv[1];
 	data.mlx_connection = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_connection, WIN_WIDTH, WIN_HEIGHT, "SO LONG");
 	init_sprites(&data);
-	render_map(argv[1]);
+	size_map(&map);
+	render_map(&map);
 //	data.img.mlx_img = mlx_new_image(data.mlx_connection, 64, 64);
 //	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
 	/*Hooks*/
