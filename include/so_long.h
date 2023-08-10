@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/08 18:02:13 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:18:07 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@
 
 
 /*Macros*/
-# ifndef WIN_WIDTH
-#  define WIN_WIDTH 800
-# endif
-
-# ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 600
-# endif
 
 # ifndef TILE_SIZE
 #  define TILE_SIZE 64
@@ -81,6 +74,20 @@ typedef struct	s_sprite
 	int	y;
 }	t_sprite;
 
+typedef struct	s_player
+{
+	void	*u_ptr;
+	void	*d_ptr;
+	void	*r_ptr;
+	void	*l_ptr;
+	int	width;
+	int	height;
+	int	x;
+	int	y;
+	int	direction;
+	int	move_count;
+}	t_player;
+
 typedef struct	s_img
 {
 	void	*mlx_img;
@@ -103,16 +110,17 @@ typedef struct s_data
 	t_sprite	asteroid;
 	t_sprite	portal;
 	t_sprite	oxygen;
-	t_sprite	astronaut_u;
-	t_sprite	astronaut_r;
-	t_sprite	astronaut_l;
-	t_sprite	astronaut_d;
+	t_player	astronaut;
 }	t_data;
 
 /*Render functions*/
 void	render_rect(t_img *img, int color);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int	render_space(t_data *data, int pos_x, int pos_y);
+void	move_up(t_data *game, t_player *astronaut);
+void	move_down(t_data *game, t_player *astronaut);
+void	move_right(t_data *game, t_player *astronaut);
+void	move_left(t_data *game, t_player *astronaut);
 
 /*Close window functions*/
 int	x_win(t_data *data);
