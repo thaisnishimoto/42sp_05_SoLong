@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/18 18:23:21 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:38:09 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ typedef struct	s_map
 	int	columns;
 	int	rows;
 	char	**grid;
-	int	pos_x;
-	int	pos_y;
+	int	player_count;
+	int	collect_count;
+	int	exit_count;
 }	t_map;
 
 typedef struct	s_win
@@ -113,9 +114,11 @@ typedef struct s_data
 	t_player	astronaut;
 }	t_data;
 
-/*Render functions*/
+/*Main function calls*/
 void	read_map(int argc, t_map *map);
+void	validate_map_content(t_map *map);
 
+/*Utils - Render functions*/
 void	render_rect(t_img *img, int color);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int	render_space(t_data *data, int pos_x, int pos_y);
@@ -126,6 +129,7 @@ void	move_left(t_data *game, t_player *astronaut);
 
 /*Close window functions*/
 void	handle_error(int stage, char *error_msg);
+void	free_map(t_map *map);
 int	x_win(t_data *data);
 int	esc_win(int keysym, t_data *data);
 

@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/18 18:26:34 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:31:04 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,11 +282,9 @@ int	main(int argc, char* argv[])
 {
 	t_data	data;
 	
-//	if (argc != 2)
-//		ft_printf("Too many files");
 	data.map.file = argv[1];
-//	size_map(&data.map);
 	read_map(argc, &data.map);
+	validate_map_content(&data.map);
 	size_window(&data);
 	data.mlx_connection = mlx_init();
 	data.win.mlx_win = mlx_new_window(data.mlx_connection, data.win.width, data.win.height, "SO LONG");
