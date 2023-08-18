@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/09 19:18:07 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:23:21 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ typedef struct s_data
 }	t_data;
 
 /*Render functions*/
+void	read_map(int argc, t_map *map);
+
 void	render_rect(t_img *img, int color);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int	render_space(t_data *data, int pos_x, int pos_y);
@@ -123,6 +125,7 @@ void	move_right(t_data *game, t_player *astronaut);
 void	move_left(t_data *game, t_player *astronaut);
 
 /*Close window functions*/
+void	handle_error(int stage, char *error_msg);
 int	x_win(t_data *data);
 int	esc_win(int keysym, t_data *data);
 

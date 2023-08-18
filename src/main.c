@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/09 19:16:02 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:26:34 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,24 +180,24 @@ int	init_sprites(t_data* data)
 	return (0);
 }
 
-void	size_map(t_map* map)
-{
-	int	fd;
-	char	*line;
-
-	map->columns = 0;
-	map->rows = 0;
-	fd = open(map->file, O_RDWR);
-	line = ft_get_next_line(fd);
-	map->columns = ft_strlen(line) - 1;
-	while (line)
-	{
-		free(line);
-		map->rows++;
-		line = ft_get_next_line(fd);
-	}
-	close (fd);
-}
+//void	size_map(t_map* map)
+//{
+//	int	fd;
+//	char	*line;
+//
+//	map->columns = 0;
+//	map->rows = 0;
+//	fd = open(map->file, O_RDWR);
+//	line = ft_get_next_line(fd);
+//	map->columns = ft_strlen(line) - 1;
+//	while (line)
+//	{
+//		free(line);
+//		map->rows++;
+//		line = ft_get_next_line(fd);
+//	}
+//	close (fd);
+//}
 
 void	size_window(t_data *data)
 {
@@ -205,24 +205,24 @@ void	size_window(t_data *data)
 	data->win.height = data->map.rows * TILE_SIZE;
 }
 
-void	read_map(t_map* map)
-{
-	int	fd;
-	int	y;
-
-	y = 0;
-	map->grid = malloc((map->rows) * sizeof(char*));
-	if (map->grid == NULL)
-		return ;
-	fd = open(map->file, O_RDWR);
-	while (y < map->rows)
-	{
-		map->grid[y] = ft_get_next_line(fd);
-		ft_printf("%s", map->grid[y]);
-		y++;
-	}
-	close (fd);
-}
+//void	read_map(t_map* map)
+//{
+//	int	fd;
+//	int	y;
+//
+//	y = 0;
+//	map->grid = malloc((map->rows) * sizeof(char*));
+//	if (map->grid == NULL)
+//		return ;
+//	fd = open(map->file, O_RDWR);
+//	while (y < map->rows)
+//	{
+//		map->grid[y] = ft_get_next_line(fd);
+//		ft_printf("%s", map->grid[y]);
+//		y++;
+//	}
+//	close (fd);
+//}
 
 int	render_map(t_data *data)
 {
@@ -282,12 +282,12 @@ int	main(int argc, char* argv[])
 {
 	t_data	data;
 	
-	if (argc != 2)
-		ft_printf("Too many files");
+//	if (argc != 2)
+//		ft_printf("Too many files");
 	data.map.file = argv[1];
-	size_map(&data.map);
+//	size_map(&data.map);
+	read_map(argc, &data.map);
 	size_window(&data);
-	read_map(&data.map);
 	data.mlx_connection = mlx_init();
 	data.win.mlx_win = mlx_new_window(data.mlx_connection, data.win.width, data.win.height, "SO LONG");
 	init_sprites(&data);
