@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 11:59:45 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:15:53 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ int	render_map(t_data *data)
 	return (0);
 }
 
-void	free_map(t_map* map)
+void	free_map(t_map *map)
 {
 	int	y;
 
@@ -286,6 +286,7 @@ int	main(int argc, char* argv[])
 	data.map.file = argv[1];
 	read_map(argc, &data.map);
 	validate_map_content(&data.map);
+	check_valid_path(&data);
 	size_window(&data);
 	data.mlx_connection = mlx_init();
 	data.win.mlx_win = mlx_new_window(data.mlx_connection, data.win.width, data.win.height, "SO LONG");

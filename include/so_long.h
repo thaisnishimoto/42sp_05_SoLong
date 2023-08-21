@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/18 18:38:09 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:35:45 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,14 @@ typedef struct	s_map
 	int	player_count;
 	int	collect_count;
 	int	exit_count;
+	int	valid_path;
 }	t_map;
+
+typedef struct s_dir
+{
+	int	x[4];
+	int	y[4];
+}	t_dir;
 
 typedef struct	s_win
 {
@@ -117,6 +124,7 @@ typedef struct s_data
 /*Main function calls*/
 void	read_map(int argc, t_map *map);
 void	validate_map_content(t_map *map);
+void	check_valid_path(t_data *game);
 
 /*Utils - Render functions*/
 void	render_rect(t_img *img, int color);
