@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 14:35:45 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:23:09 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@
 # define ASTEROID "./images/asteroid.xpm"
 # define PORTAL "./images/portal transcendence.xpm"
 # define OXYGEN "./images/oxygen.xpm"
-# define ASTRONAUT_U "./images/astronaut_up.xpm"
-# define ASTRONAUT_R "./images/astronaut_right.xpm"
-# define ASTRONAUT_L "./images/astronaut_left.xpm"
-# define ASTRONAUT_D "./images/astronaut_down.xpm"
+# define ASTRO_U "./images/astronaut_up.xpm"
+# define ASTRO_R "./images/astronaut_right.xpm"
+# define ASTRO_L "./images/astronaut_left.xpm"
+# define ASTRO_D "./images/astronaut_down.xpm"
 
 /*Structs*/
 typedef struct	s_map
@@ -125,6 +125,7 @@ typedef struct s_data
 void	read_map(int argc, t_map *map);
 void	validate_map_content(t_map *map);
 void	check_valid_path(t_data *game);
+void	initiate_game(t_data *game);
 
 /*Utils - Render functions*/
 void	render_rect(t_img *img, int color);
