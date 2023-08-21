@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/18 18:31:04 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:59:45 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,13 @@ int	x_win(t_data *data)
 
 int	key_hook(int keysym, t_data *game)
 {
-	if (keysym == XK_Up || keysym == XK_u)
+	if (keysym == XK_Up || keysym == XK_w)
 		move_up(game, &game->astronaut);
-	if (keysym == XK_Down || keysym == XK_d)
+	if (keysym == XK_Down || keysym == XK_s)
 		move_down(game, &game->astronaut);
-	if (keysym == XK_Right || keysym == XK_r)
+	if (keysym == XK_Right || keysym == XK_d)
 		move_right(game, &game->astronaut);
-	if (keysym == XK_Left || keysym == XK_l)
+	if (keysym == XK_Left || keysym == XK_a)
 		move_left(game, &game->astronaut);
 	if (keysym == XK_Escape)
 	{
@@ -177,6 +177,7 @@ int	init_sprites(t_data* data)
 	data->astronaut.d_ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_D, &data->astronaut.width, &data->astronaut.height);
 	data->astronaut.r_ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_R, &data->astronaut.width, &data->astronaut.height);
 	data->astronaut.l_ptr = mlx_xpm_file_to_image(data->mlx_connection, ASTRONAUT_L, &data->astronaut.width, &data->astronaut.height);
+	data->astronaut.direction = 'd';
 	return (0);
 }
 
