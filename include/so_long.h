@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 23:33:37 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 00:14:34 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ void	check_valid_path(t_data *game);
 void	initiate_game(t_data *game);
 
 /*Utils - Render functions*/
-//void	render_rect(t_img *img, int color);
+int	render_map(t_data *data);
+int	key_hook(int keysym, t_data *game);
 //void	img_pix_put(t_img *img, int x, int y, int color);
 int	render_space(t_data *data, int pos_x, int pos_y);
 void	move_up(t_data *game, t_player *astronaut);

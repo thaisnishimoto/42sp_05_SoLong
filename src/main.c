@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 23:36:45 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 00:09:51 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,20 @@ void	render_collectible(t_data *data, int x, int y)
 	mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->oxygen.ptr, x * TILE_SIZE, y * TILE_SIZE);
 }
 
-//int	x_win(t_data *data)
+//int	key_hook(int keysym, t_data *game)
 //{
-//        mlx_destroy_window(data->mlx_connection, data->win.mlx_win);
-//        data->win.mlx_win = NULL;
+//	if (keysym == XK_Up || keysym == XK_w)
+//		move_up(game, &game->astronaut);
+//	if (keysym == XK_Down || keysym == XK_s)
+//		move_down(game, &game->astronaut);
+//	if (keysym == XK_Right || keysym == XK_d)
+//		move_right(game, &game->astronaut);
+//	if (keysym == XK_Left || keysym == XK_a)
+//		move_left(game, &game->astronaut);
+//	if (keysym == XK_Escape)
+//		close_window(game);
 //	return (0);
 //}
-
-int	key_hook(int keysym, t_data *game)
-{
-	if (keysym == XK_Up || keysym == XK_w)
-		move_up(game, &game->astronaut);
-	if (keysym == XK_Down || keysym == XK_s)
-		move_down(game, &game->astronaut);
-	if (keysym == XK_Right || keysym == XK_d)
-		move_right(game, &game->astronaut);
-	if (keysym == XK_Left || keysym == XK_a)
-		move_left(game, &game->astronaut);
-	if (keysym == XK_Escape)
-		close_window(game);
-	return (0);
-}
 
 int	render_map(t_data *data)
 {
@@ -145,11 +138,9 @@ int	main(int argc, char* argv[])
 	initiate_game(&data);
 //	data.img.mlx_img = mlx_new_image(data.mlx_connection, 64, 64);
 //	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
-	/*Hooks*/
 	mlx_hook(data.win.mlx_win, KeyPress, KeyPressMask, &key_hook, &data);
 	mlx_hook(data.win.mlx_win, DestroyNotify, StructureNotifyMask, &close_window, &data);
 	mlx_loop_hook(data.mlx_connection, &render_map, &data);
-
 	mlx_loop(data.mlx_connection);
 	
 	free_map(&data.map);
