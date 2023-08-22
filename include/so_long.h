@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 15:23:09 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 23:33:37 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ typedef struct s_data
 
 /*Main function calls*/
 void	read_map(int argc, t_map *map);
-void	validate_map_content(t_map *map);
+void	validate_map_content(t_data *game);
 void	check_valid_path(t_data *game);
 void	initiate_game(t_data *game);
 
 /*Utils - Render functions*/
-void	render_rect(t_img *img, int color);
-void	img_pix_put(t_img *img, int x, int y, int color);
+//void	render_rect(t_img *img, int color);
+//void	img_pix_put(t_img *img, int x, int y, int color);
 int	render_space(t_data *data, int pos_x, int pos_y);
 void	move_up(t_data *game, t_player *astronaut);
 void	move_down(t_data *game, t_player *astronaut);
@@ -137,9 +137,11 @@ void	move_right(t_data *game, t_player *astronaut);
 void	move_left(t_data *game, t_player *astronaut);
 
 /*Close window functions*/
-void	handle_error(int stage, char *error_msg);
+void	handle_error(int stage, int perror, char *error_msg, t_data *game);
 void	free_map(t_map *map);
-int	x_win(t_data *data);
-int	esc_win(int keysym, t_data *data);
+void	free_sprites(t_data *game);
+int	close_window(t_data *game);
+void	end_mlx_connection(t_data *game);
+//int	esc_win(int keysym, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:10:01 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 14:35:12 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 22:44:40 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static void	allocate_flag_grid(t_data *game, t_map *seen_flag)
 	seen_flag->rows = game->map.rows;
 	seen_flag->grid = ft_calloc(seen_flag->rows, sizeof(char *));
 	if (seen_flag->grid == NULL)
-	{
-		free_map(&game->map);
-		handle_error(2, "Error\n");
-	}
+		handle_error(2, 1, "Error\n", game);
 	while (y < game->map.rows)
 	{
 		seen_flag->grid[y] = ft_calloc(seen_flag->columns, sizeof(char));
@@ -34,8 +31,7 @@ static void	allocate_flag_grid(t_data *game, t_map *seen_flag)
 			while (y > 0)
 				free(seen_flag->grid[y--]);
 			free(seen_flag->grid);
-			free_map(&game->map);
-			handle_error(2, "Error\n");
+			handle_error(2, 1, "Error\n", game);
 		}
 		y++;
 	}
@@ -115,14 +111,12 @@ void	check_valid_path(t_data *game)
 	if (seen_flag.valid_path == 0)
 	{
 		free_map(&seen_flag);
-		free_map(&game->map);
-		handle_error(1, "Invalid path to exit!\n");
+		handle_error(2, 0, "Invalid path to exit!\n", game);
 	}
 	if (seen_flag.collect_count < game->map.collect_count)
 	{
 		free_map(&seen_flag);
-		free_map(&game->map);
-		handle_error(1, "Invalid path to collectibles!\n");
+		handle_error(2, 0, "Invalid path to collectibles!\n", game);
 	}
 	free_map(&seen_flag);
 }

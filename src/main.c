@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 16:55:23 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 23:36:45 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	render_collectible(t_data *data, int x, int y)
 	mlx_put_image_to_window(data->mlx_connection, data->win.mlx_win, data->oxygen.ptr, x * TILE_SIZE, y * TILE_SIZE);
 }
 
-int	x_win(t_data *data)
-{
-        mlx_destroy_window(data->mlx_connection, data->win.mlx_win);
-        data->win.mlx_win = NULL;
-	return (0);
-}
+//int	x_win(t_data *data)
+//{
+//        mlx_destroy_window(data->mlx_connection, data->win.mlx_win);
+//        data->win.mlx_win = NULL;
+//	return (0);
+//}
 
 int	key_hook(int keysym, t_data *game)
 {
@@ -89,7 +89,7 @@ int	key_hook(int keysym, t_data *game)
 	if (keysym == XK_Left || keysym == XK_a)
 		move_left(game, &game->astronaut);
 	if (keysym == XK_Escape)
-		x_win(game);
+		close_window(game);
 	return (0);
 }
 
@@ -140,14 +140,14 @@ int	main(int argc, char* argv[])
 	
 	data.map.file = argv[1];
 	read_map(argc, &data.map);
-	validate_map_content(&data.map);
+	validate_map_content(&data);
 	check_valid_path(&data);
 	initiate_game(&data);
 //	data.img.mlx_img = mlx_new_image(data.mlx_connection, 64, 64);
 //	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
 	/*Hooks*/
 	mlx_hook(data.win.mlx_win, KeyPress, KeyPressMask, &key_hook, &data);
-	mlx_hook(data.win.mlx_win, DestroyNotify, StructureNotifyMask, &x_win, &data);
+	mlx_hook(data.win.mlx_win, DestroyNotify, StructureNotifyMask, &close_window, &data);
 	mlx_loop_hook(data.mlx_connection, &render_map, &data);
 
 	mlx_loop(data.mlx_connection);

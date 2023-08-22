@@ -6,91 +6,77 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:35:25 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/15 17:02:23 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/21 22:35:25 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-static void	parse_map(t_map *map)
+static void	parse_map(t_data *game)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < map->rows)
+	while (y < game->map.rows)
 	{
 		x = 0;
-		while (x < map->columns)
+		while (x < game->map.columns)
 		{
-			if (map->grid[y][x] == 'P')
-				map->player_count++;
-			else if (map->grid[y][x] == 'C')
-				map->collect_count++;
-			else if (map->grid[y][x] == 'E')
-				map->exit_count++;
-			else if (ft_strchr("01CEPX", map->grid[y][x]) == NULL)
-			{
-				free_map(map);
-				handle_error(1, "Map with invalid component!\n");
-			}
+			if (game->map.grid[y][x] == 'P')
+				game->map.player_count++;
+			else if (game->map.grid[y][x] == 'C')
+				game->map.collect_count++;
+			else if (game->map.grid[y][x] == 'E')
+				game->map.exit_count++;
+			else if (ft_strchr("01CEPX", game->map.grid[y][x]) == NULL)
+				handle_error(2, 0, "Map with invalid component!\n", game);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	check_content_count(t_map *map)
+static void	check_content_count(t_data *game)
 {
-	if (map->player_count != 1)
-	{
-		free_map(map);
-		handle_error(1, "Map must have one starting position!\n");
-	}
-	else if (map->collect_count < 1)
-	{
-		free_map(map);
-		handle_error(1, "Map must have at least one collectible!\n");
-	}
-	if (map->exit_count != 1)
-	{
-		free_map(map);
-		handle_error(1, "Map must have one exit!\n");
-	}
+	if (game->map.player_count != 1)
+		handle_error(2, 0, "Map must have one starting position!\n", game);
+	if (game->map.collect_count < 1)
+		handle_error(2, 0, "Map must have at least one collectible!\n", game);
+	if (game->map.exit_count != 1)
+		handle_error(2, 0, "Map must have one exit!\n", game);
 }
 
-static void	check_map_walls(t_map *map)
+static void	check_map_walls(t_data *game)
 {
 	int	i;
+	int	rows;
+	int	cols;
 
 	i = 0;
-	while (i < map->columns)
+	rows = game->map.rows;
+	cols = game->map.columns;
+	while (i < cols)
 	{
-		if (map->grid[0][i] != '1' || map->grid[map->rows - 1][i] != '1')
-		{
-			free_map(map);
-			handle_error(1, "Map must be surrounded by walls!\n");
-		}
+		if (game->map.grid[0][i] != '1' || game->map.grid[rows - 1][i] != '1')
+			handle_error(2, 0, "Map must be surrounded by walls!\n", game);
 		i++;
 	}
 	i = 0;
-	while (i < map->rows)
+	while (i < rows)
 	{
-		if (map->grid[i][0] != '1' || map->grid[i][map->columns - 1] != '1')
-		{
-			free_map(map);
-			handle_error(1, "Map must be surrounded by walls!\n");
-		}
+		if (game->map.grid[i][0] != '1' || game->map.grid[i][cols - 1] != '1')
+			handle_error(2, 0, "Map must be surrounded by walls!\n", game);
 		i++;
 	}
 }
 
-void	validate_map_content(t_map *map)
+void	validate_map_content(t_data *game)
 {
-	map->player_count = 0;
-	map->collect_count = 0;
-	map->exit_count = 0;
-	parse_map(map);
-	check_content_count(map);
-	check_map_walls(map);
+	game->map.player_count = 0;
+	game->map.collect_count = 0;
+	game->map.exit_count = 0;
+	parse_map(game);
+	check_content_count(game);
+	check_map_walls(game);
 }
