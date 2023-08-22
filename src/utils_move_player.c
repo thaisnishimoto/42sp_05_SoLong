@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   utils_move_player.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:37:20 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/10 12:49:33 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:11:56 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	check_front_is_wall(t_data *game, int x, int y)
+static int	check_front_is_wall(t_data *game, int x, int y)
 {
 	if (game->astronaut.direction == 'u')
 		y--;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook_utils.c                                   :+:      :+:    :+:   */
+/*   hook_events.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:39:04 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 00:21:28 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:13:45 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,26 @@ int	key_hook(int keysym, t_data *game)
 		close_window(game);
 	return (0);
 }
+
+int	render_hook(t_data *game)
+{
+	int	x;
+	int	y;
+	
+	if (game->win.mlx_win == NULL)
+		return (1);
+	y = 0;
+	while (y < game->map.rows)
+	{
+		x = 0;
+		while (x < game->map.columns)
+		{
+			render_game(game, x, y);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+

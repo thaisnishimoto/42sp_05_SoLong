@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 00:14:34 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:17:09 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 #  define TILE_SIZE 64
 # endif
 
-# ifndef DELAY_FRAME
-#  define DELAY_FRAME 100
+# ifndef REPEAT_FRAME
+#  define REPEAT_FRAME 100
 # endif
 
 /*Sprites*/
@@ -127,11 +127,14 @@ void	validate_map_content(t_data *game);
 void	check_valid_path(t_data *game);
 void	initiate_game(t_data *game);
 
-/*Utils - Render functions*/
-int	render_map(t_data *data);
+/*Hook events*/
 int	key_hook(int keysym, t_data *game);
-//void	img_pix_put(t_img *img, int x, int y, int color);
-int	render_space(t_data *data, int pos_x, int pos_y);
+int	render_hook(t_data *game);
+
+/*Utils - Render functions*/
+void	render_game(t_data *game, int x, int y);
+
+/*Utils - Move functions*/
 void	move_up(t_data *game, t_player *astronaut);
 void	move_down(t_data *game, t_player *astronaut);
 void	move_right(t_data *game, t_player *astronaut);
@@ -142,6 +145,7 @@ void	handle_error(int stage, int perror, char *error_msg, t_data *game);
 void	free_map(t_map *map);
 void	free_sprites(t_data *game);
 int	close_window(t_data *game);
+//void	img_pix_put(t_img *img, int x, int y, int color);
 void	end_mlx_connection(t_data *game);
 //int	esc_win(int keysym, t_data *data);
 
