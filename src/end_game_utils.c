@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:37:22 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 23:29:01 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 00:19:14 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,6 @@ void	free_map(t_map *map)
 	free(map->grid);
 }
 
-int	close_window(t_data *game)
-{
-	mlx_destroy_window(game->mlx_connection, game->win.mlx_win);
-        game->win.mlx_win = NULL;
-        return (0);
-}
-
-void	end_mlx_connection(t_data *game)
-{
-	mlx_destroy_display(game->mlx_connection);
-	free(game->mlx_connection);
-}
-
 void	free_sprites(t_data* game)
 {
 	if (game->space1.ptr != NULL)
@@ -82,10 +69,15 @@ void	free_sprites(t_data* game)
 		mlx_destroy_image(game->mlx_connection, game->astronaut.l_ptr);
 }
 
-//void	end_game(t_data* game)
-//{
-//	free_map(&game->map);
-//	free_sprites(&game);
-//	mlx_destroy_display(game->mlx_connection);
-//	free(game->mlx_connection);
-//}
+int	close_window(t_data *game)
+{
+	mlx_destroy_window(game->mlx_connection, game->win.mlx_win);
+        game->win.mlx_win = NULL;
+        return (0);
+}
+
+void	end_mlx_connection(t_data *game)
+{
+	mlx_destroy_display(game->mlx_connection);
+	free(game->mlx_connection);
+}
