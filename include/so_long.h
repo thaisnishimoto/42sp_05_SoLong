@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 12:17:09 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:20:18 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define SPACE4 "./images/space_frame4.xpm"
 # define ASTEROID "./images/asteroid.xpm"
 # define PORTAL "./images/portal transcendence.xpm"
+# define BLOCK_E "./images/blocked_exit.xpm"
 # define OXYGEN "./images/oxygen.xpm"
 # define ASTRO_U "./images/astronaut_up.xpm"
 # define ASTRO_R "./images/astronaut_right.xpm"
@@ -117,6 +118,7 @@ typedef struct s_data
 	t_sprite	space4;
 	t_sprite	asteroid;
 	t_sprite	portal;
+	t_sprite	block_exit;
 	t_sprite	oxygen;
 	t_player	astronaut;
 }	t_data;

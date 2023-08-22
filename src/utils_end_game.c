@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_game_utils.c                                   :+:      :+:    :+:   */
+/*   utils_end_game.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:37:22 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 00:19:14 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:04:30 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void    handle_error(int stage, int error_type, char *error_msg, t_data *game)
+void	handle_error(int stage, int error_type, char *error_msg, t_data *game)
 {
 	if (stage >= 2)
 	{
 		free_map(&game->map);
 		if (stage == 3)
+		{
+			free_sprites(game);
 			end_mlx_connection(game);
+		}
 	}
 	if (error_type == 1)
 	{
@@ -43,7 +46,7 @@ void	free_map(t_map *map)
 	free(map->grid);
 }
 
-void	free_sprites(t_data* game)
+void	free_sprites(t_data *game)
 {
 	if (game->space1.ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->space1.ptr);
@@ -59,6 +62,8 @@ void	free_sprites(t_data* game)
 		mlx_destroy_image(game->mlx_connection, game->oxygen.ptr);
 	if (game->portal.ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->portal.ptr);
+	if (game->block_exit.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->block_exit.ptr);
 	if (game->astronaut.u_ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->astronaut.u_ptr);
 	if (game->astronaut.d_ptr != NULL)
@@ -72,8 +77,8 @@ void	free_sprites(t_data* game)
 int	close_window(t_data *game)
 {
 	mlx_destroy_window(game->mlx_connection, game->win.mlx_win);
-        game->win.mlx_win = NULL;
-        return (0);
+	game->win.mlx_win = NULL;
+	return (0);
 }
 
 void	end_mlx_connection(t_data *game)

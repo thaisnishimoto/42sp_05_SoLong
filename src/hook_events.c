@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:39:04 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 12:13:45 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:53:35 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	render_hook(t_data *game)
 {
 	int	x;
 	int	y;
-	
+
 	if (game->win.mlx_win == NULL)
 		return (1);
 	y = 0;
@@ -47,5 +47,3 @@ int	render_hook(t_data *game)
 	}
 	return (0);
 }
-
-

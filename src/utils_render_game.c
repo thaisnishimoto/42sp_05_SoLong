@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:12:58 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 12:18:01 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:23:45 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,7 @@ void	render_game(t_data *game, int x, int y)
 			game->portal.ptr, x * TILE_SIZE, y * TILE_SIZE);
 	if (game->map.grid[y][x] == 'P')
 		render_astronaut(game, x, y);
+	if (game->map.grid[y][x] == 'B')
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->block_exit.ptr, x * TILE_SIZE, y * TILE_SIZE);
 }

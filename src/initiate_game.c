@@ -6,27 +6,11 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:08 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 23:29:55 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:06:00 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-static void	init_window(t_data *game)
-{
-	int	screen_width;
-	int	screen_height;
-
-	mlx_get_screen_size(game->mlx_connection, &screen_width, &screen_height);
-	game->win.width = game->map.columns * TILE_SIZE;
-	game->win.height = game->map.rows * TILE_SIZE;
-	if (game->win.width > screen_width || game->win.height > screen_height)
-		handle_error(3, 0, "Map is too big for this screen!\n", game);
-	game->win.mlx_win = mlx_new_window(game->mlx_connection,
-			game->win.width, game->win.height, "SO LONG");
-	if (game->win.mlx_win == NULL)
-		handle_error(3, 0, "mlx_new_window failed!\n", game);
-}
 
 static void	init_sprites_background(t_data *game)
 {
@@ -42,6 +26,8 @@ static void	init_sprites_background(t_data *game)
 			&game->asteroid.width, &game->asteroid.height);
 	game->portal.ptr = mlx_xpm_file_to_image(game->mlx_connection, PORTAL,
 			&game->portal.width, &game->portal.height);
+	game->block_exit.ptr = mlx_xpm_file_to_image(game->mlx_connection, BLOCK_E,
+			&game->block_exit.width, &game->block_exit.height);
 	game->oxygen.ptr = mlx_xpm_file_to_image(game->mlx_connection, OXYGEN,
 			&game->oxygen.width, &game->oxygen.height);
 }
@@ -60,23 +46,35 @@ static void	init_sprites_player(t_data *game)
 	game->astronaut.move_count = 0;
 }
 
+static void	init_window(t_data *game)
+{
+	int	screen_width;
+	int	screen_height;
+
+	mlx_get_screen_size(game->mlx_connection, &screen_width, &screen_height);
+	game->win.width = game->map.columns * TILE_SIZE;
+	game->win.height = game->map.rows * TILE_SIZE;
+	if (game->win.width > screen_width || game->win.height > screen_height)
+		handle_error(3, 0, "Map is too big for this screen!\n", game);
+	game->win.mlx_win = mlx_new_window(game->mlx_connection,
+			game->win.width, game->win.height, "SO LONG");
+	if (game->win.mlx_win == NULL)
+		handle_error(3, 0, "mlx_new_window failed!\n", game);
+}
+
 void	initiate_game(t_data *game)
 {
 	game->mlx_connection = mlx_init();
 	if (game->mlx_connection == NULL)
 		handle_error(2, 0, "mlx_init failed!\n", game);
-	init_window(game);
 	init_sprites_background(game);
 	init_sprites_player(game);
 	if (game->space1.ptr == NULL || game->space2.ptr == NULL
 		|| game->space3.ptr == NULL || game->space4.ptr == NULL
 		|| game->asteroid.ptr == NULL || game->portal.ptr == NULL
-		|| game->oxygen.ptr == NULL || game->astronaut.u_ptr == NULL
-		|| game->astronaut.d_ptr == NULL || game->astronaut.r_ptr == NULL
-		|| game->astronaut.l_ptr == NULL)
-	{
-		close_window(game);
-		free_sprites(game);
+		|| game->block_exit.ptr == NULL || game->oxygen.ptr == NULL
+		|| game->astronaut.u_ptr == NULL || game->astronaut.d_ptr == NULL
+		|| game->astronaut.r_ptr == NULL || game->astronaut.l_ptr == NULL)
 		handle_error(3, 0, "XPM image loading failed!\n", game);
-	}
+	init_window(game);
 }
