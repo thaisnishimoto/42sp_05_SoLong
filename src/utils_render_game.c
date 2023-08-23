@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:12:58 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 23:59:07 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:28:19 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	render_wall(t_data *game, int x, int y)
 			game->move_display.ptr, x * TILE_SIZE, y * TILE_SIZE);
 	else if (x == 0 && y == 1)
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-			game->tank_display.ptr, x * TILE_SIZE, y * TILE_SIZE);
+			game->star_display.ptr, x * TILE_SIZE, y * TILE_SIZE);
 	else
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->asteroid.ptr, x * TILE_SIZE, y * TILE_SIZE);
@@ -48,8 +48,23 @@ static void	render_wall(t_data *game, int x, int y)
 
 static void	render_collectible(t_data *game, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-		game->oxygen.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	static int	i;
+
+	if (i >= 0 && i <= REPEAT_FRAME * 1)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->star.ptr1, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME * 1 && i <= REPEAT_FRAME * 2)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->star.ptr2, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME * 2 && i <= REPEAT_FRAME * 3)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->star.ptr3, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME * 3 && i <= REPEAT_FRAME * 4)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->star.ptr4, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME * 4)
+		i = 0;
+	i++;
 }
 
 static void	render_astronaut(t_data *game, int x, int y)
@@ -74,7 +89,7 @@ static void	display_on_screen(t_data *game)
 {
 	char	*move_count;
 	char	*collect_count;
-	int	x;
+	int		x;
 
 	if (game->astronaut.move_count < 10)
 		x = 29;
@@ -82,8 +97,10 @@ static void	display_on_screen(t_data *game)
 		x = 26;
 	move_count = ft_itoa(game->astronaut.move_count);
 	collect_count = ft_itoa(game->map.collect_count);
-	mlx_string_put(game->mlx_connection, game->win.mlx_win, x, 44, 0xFFFFFF, move_count);
-	mlx_string_put(game->mlx_connection, game->win.mlx_win, 29, 115, 0xFFFFFF, collect_count);
+	mlx_string_put(game->mlx_connection, game->win.mlx_win,
+		x, 44, 0xFFFFFF, move_count);
+	mlx_string_put(game->mlx_connection, game->win.mlx_win,
+		29, 113, 0xFFFFFF, collect_count);
 	free(move_count);
 	free(collect_count);
 }

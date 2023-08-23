@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:35:25 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 17:58:12 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:07:53 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static void	allocate_map_content(t_map *map)
 	while (y < map->rows)
 	{
 		map->grid[y] = ft_get_next_line(fd);
-		ft_printf("%s", map->grid[y]);
 		y++;
 	}
 	close (fd);

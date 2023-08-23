@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 19:25:29 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:19:50 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # endif
 
 # ifndef REPEAT_FRAME
-#  define REPEAT_FRAME 100
+#  define REPEAT_FRAME 90
 # endif
 
 /*Sprites*/
@@ -41,13 +41,16 @@
 # define ASTEROID "./images/asteroid.xpm"
 # define PORTAL "./images/portal transcendence.xpm"
 # define BLOCK_E "./images/blocked_exit.xpm"
-# define OXYGEN "./images/oxygen.xpm"
+# define STAR1 "./images/star1.xpm"
+# define STAR2 "./images/star2.xpm"
+# define STAR3 "./images/star3.xpm"
+# define STAR4 "./images/star4.xpm"
 # define ASTRO_U "./images/astronaut_up.xpm"
 # define ASTRO_R "./images/astronaut_right.xpm"
 # define ASTRO_L "./images/astronaut_left.xpm"
 # define ASTRO_D "./images/astronaut_down.xpm"
 # define MOVES "./images/moves_display.xpm"
-# define TANKS "./images/collect_display.xpm"
+# define COLLEC "./images/star_display.xpm"
 
 /*Structs*/
 typedef struct	s_map
@@ -85,6 +88,16 @@ typedef struct	s_sprite
 	int	y;
 }	t_sprite;
 
+typedef struct	s_animate
+{
+	void	*ptr1;
+	void	*ptr2;
+	void	*ptr3;
+	void	*ptr4;
+	int	width;
+	int	height;
+}	t_animate;
+
 typedef struct	s_player
 {
 	void	*u_ptr;
@@ -121,10 +134,10 @@ typedef struct s_data
 	t_sprite	asteroid;
 	t_sprite	portal;
 	t_sprite	block_exit;
-	t_sprite	oxygen;
+	t_animate	star;
 	t_player	astronaut;
 	t_sprite	move_display;
-	t_sprite	tank_display;
+	t_sprite	star_display;
 }	t_data;
 
 /*Main function calls*/
@@ -146,10 +159,14 @@ void	move_down(t_data *game, t_player *astronaut);
 void	move_right(t_data *game, t_player *astronaut);
 void	move_left(t_data *game, t_player *astronaut);
 
+/*Utils - Free functions*/
+void	free_map(t_map *map);
+void	free_sprites_background(t_data *game);
+void	free_sprites_items(t_data *game);
+void	free_sprites_player(t_data *game);
+
 /*Close window functions*/
 void	handle_error(int stage, int perror, char *error_msg, t_data *game);
-void	free_map(t_map *map);
-void	free_sprites(t_data *game);
 int	close_window(t_data *game);
 //void	img_pix_put(t_img *img, int x, int y, int color);
 void	end_mlx_connection(t_data *game);
