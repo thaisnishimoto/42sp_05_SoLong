@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:37:22 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 18:04:30 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:27:49 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ void	free_sprites(t_data *game)
 		mlx_destroy_image(game->mlx_connection, game->astronaut.r_ptr);
 	if (game->astronaut.l_ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->astronaut.l_ptr);
+	if (game->move_display.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->move_display.ptr);
+	if (game->tank_display.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->tank_display.ptr);
 }
 
 int	close_window(t_data *game)

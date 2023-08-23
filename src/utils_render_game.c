@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:12:58 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 17:23:45 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:59:07 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,15 @@ static void	render_space(t_data *game, int x, int y)
 
 static void	render_wall(t_data *game, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-		game->asteroid.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	if (x == 0 && y == 0)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->move_display.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	else if (x == 0 && y == 1)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->tank_display.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	else
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->asteroid.ptr, x * TILE_SIZE, y * TILE_SIZE);
 }
 
 static void	render_collectible(t_data *game, int x, int y)
@@ -63,6 +70,24 @@ static void	render_astronaut(t_data *game, int x, int y)
 			game->astronaut.l_ptr, x * TILE_SIZE, y * TILE_SIZE);
 }
 
+static void	display_on_screen(t_data *game)
+{
+	char	*move_count;
+	char	*collect_count;
+	int	x;
+
+	if (game->astronaut.move_count < 10)
+		x = 29;
+	else
+		x = 26;
+	move_count = ft_itoa(game->astronaut.move_count);
+	collect_count = ft_itoa(game->map.collect_count);
+	mlx_string_put(game->mlx_connection, game->win.mlx_win, x, 44, 0xFFFFFF, move_count);
+	mlx_string_put(game->mlx_connection, game->win.mlx_win, 29, 115, 0xFFFFFF, collect_count);
+	free(move_count);
+	free(collect_count);
+}
+
 void	render_game(t_data *game, int x, int y)
 {
 	if (game->map.grid[y][x] == '0')
@@ -79,4 +104,5 @@ void	render_game(t_data *game, int x, int y)
 	if (game->map.grid[y][x] == 'B')
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->block_exit.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	display_on_screen(game);
 }

@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:08 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 18:06:00 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:27:25 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static void	init_sprites_background(t_data *game)
 			&game->block_exit.width, &game->block_exit.height);
 	game->oxygen.ptr = mlx_xpm_file_to_image(game->mlx_connection, OXYGEN,
 			&game->oxygen.width, &game->oxygen.height);
+	game->move_display.ptr = mlx_xpm_file_to_image(game->mlx_connection, MOVES,
+			&game->move_display.width, &game->move_display.height);
+	game->tank_display.ptr = mlx_xpm_file_to_image(game->mlx_connection, TANKS,
+			&game->tank_display.width, &game->tank_display.height);
 }
 
 static void	init_sprites_player(t_data *game)
@@ -74,7 +78,8 @@ void	initiate_game(t_data *game)
 		|| game->asteroid.ptr == NULL || game->portal.ptr == NULL
 		|| game->block_exit.ptr == NULL || game->oxygen.ptr == NULL
 		|| game->astronaut.u_ptr == NULL || game->astronaut.d_ptr == NULL
-		|| game->astronaut.r_ptr == NULL || game->astronaut.l_ptr == NULL)
+		|| game->astronaut.r_ptr == NULL || game->astronaut.l_ptr == NULL
+		|| game->move_display.ptr == NULL || game->tank_display.ptr == NULL)
 		handle_error(3, 0, "XPM image loading failed!\n", game);
 	init_window(game);
 }

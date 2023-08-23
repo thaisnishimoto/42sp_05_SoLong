@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:37:20 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 18:17:55 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 00:00:56 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ static void	handle_next_step(t_data *game, t_player *astronaut, int x, int y)
 	{
 		game->map.grid[astronaut->y][astronaut->x] = '0';
 		game->map.grid[y][x] = 'B';
-		astronaut->move_count++;
-		ft_printf("Movement count = %d\n", astronaut->move_count);
 		if (game->map.collect_count == 0)
 		{
+			astronaut->move_count++;
 			ft_printf("YOU WIN!!!\n");
 			close_window(game);
 			free_map(&game->map);
@@ -54,7 +53,6 @@ void	move_up(t_data *game, t_player *astronaut)
 		handle_next_step(game, astronaut, x, y);
 		astronaut->y--;
 		astronaut->move_count++;
-		ft_printf("Movement count = %d\n", astronaut->move_count);
 	}
 }
 
@@ -71,7 +69,6 @@ void	move_down(t_data *game, t_player *astronaut)
 		handle_next_step(game, astronaut, x, y);
 		astronaut->y++;
 		astronaut->move_count++;
-		ft_printf("Movement count = %d\n", astronaut->move_count);
 	}
 }
 
@@ -88,7 +85,6 @@ void	move_right(t_data *game, t_player *astronaut)
 		handle_next_step(game, astronaut, x, y);
 		astronaut->x++;
 		astronaut->move_count++;
-		ft_printf("Movement count = %d\n", astronaut->move_count);
 	}
 }
 
@@ -105,6 +101,5 @@ void	move_left(t_data *game, t_player *astronaut)
 		handle_next_step(game, astronaut, x, y);
 		astronaut->x--;
 		astronaut->move_count++;
-		ft_printf("Movement count = %d\n", astronaut->move_count);
 	}
 }

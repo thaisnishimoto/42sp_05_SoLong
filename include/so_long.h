@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 17:20:18 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:25:29 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@
 # define ASTRO_R "./images/astronaut_right.xpm"
 # define ASTRO_L "./images/astronaut_left.xpm"
 # define ASTRO_D "./images/astronaut_down.xpm"
+# define MOVES "./images/moves_display.xpm"
+# define TANKS "./images/collect_display.xpm"
 
 /*Structs*/
 typedef struct	s_map
@@ -121,6 +123,8 @@ typedef struct s_data
 	t_sprite	block_exit;
 	t_sprite	oxygen;
 	t_player	astronaut;
+	t_sprite	move_display;
+	t_sprite	tank_display;
 }	t_data;
 
 /*Main function calls*/
