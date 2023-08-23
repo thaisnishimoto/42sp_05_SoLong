@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:35:25 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/21 22:35:25 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:42:06 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	parse_map(t_data *game)
 			else if (game->map.grid[y][x] == 'E')
 				game->map.exit_count++;
 			else if (ft_strchr("01CEPX", game->map.grid[y][x]) == NULL)
-				handle_error(2, 0, "Map with invalid component!\n", game);
+				handle_error(0, "Map with invalid component!\n", game);
 			x++;
 		}
 		y++;
@@ -40,11 +40,11 @@ static void	parse_map(t_data *game)
 static void	check_content_count(t_data *game)
 {
 	if (game->map.player_count != 1)
-		handle_error(2, 0, "Map must have one starting position!\n", game);
+		handle_error(0, "Map must have one starting position!\n", game);
 	if (game->map.collect_count < 1)
-		handle_error(2, 0, "Map must have at least one collectible!\n", game);
+		handle_error(0, "Map must have at least one collectible!\n", game);
 	if (game->map.exit_count != 1)
-		handle_error(2, 0, "Map must have one exit!\n", game);
+		handle_error(0, "Map must have one exit!\n", game);
 }
 
 static void	check_map_walls(t_data *game)
@@ -59,20 +59,21 @@ static void	check_map_walls(t_data *game)
 	while (i < cols)
 	{
 		if (game->map.grid[0][i] != '1' || game->map.grid[rows - 1][i] != '1')
-			handle_error(2, 0, "Map must be surrounded by walls!\n", game);
+			handle_error(0, "Map must be surrounded by walls!\n", game);
 		i++;
 	}
 	i = 0;
 	while (i < rows)
 	{
 		if (game->map.grid[i][0] != '1' || game->map.grid[i][cols - 1] != '1')
-			handle_error(2, 0, "Map must be surrounded by walls!\n", game);
+			handle_error(0, "Map must be surrounded by walls!\n", game);
 		i++;
 	}
 }
 
 void	validate_map_content(t_data *game)
 {
+	game->config_stage = 2;
 	game->map.player_count = 0;
 	game->map.collect_count = 0;
 	game->map.exit_count = 0;

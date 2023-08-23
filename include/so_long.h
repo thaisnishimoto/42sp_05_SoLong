@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 10:19:50 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:04:41 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@
 # include <unistd.h> //write, read
 # include <fcntl.h> //open, close
 
-
 /*Macros*/
-
 # ifndef TILE_SIZE
 #  define TILE_SIZE 64
 # endif
@@ -53,16 +51,16 @@
 # define COLLEC "./images/star_display.xpm"
 
 /*Structs*/
-typedef struct	s_map
+typedef struct s_map
 {
 	char	*file;
-	int	columns;
-	int	rows;
 	char	**grid;
-	int	player_count;
-	int	collect_count;
-	int	exit_count;
-	int	valid_path;
+	int		columns;
+	int		rows;
+	int		player_count;
+	int		collect_count;
+	int		exit_count;
+	int		valid_path;
 }	t_map;
 
 typedef struct s_dir
@@ -71,87 +69,78 @@ typedef struct s_dir
 	int	y[4];
 }	t_dir;
 
-typedef struct	s_win
+typedef struct s_win
 {
 	void	*mlx_win;
-	int	width;
-	int	height;
+	int		width;
+	int		height;
 }	t_win;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	void	*ptr;
 	char	*path;
-	int	width;
-	int	height;
-	int	x;
-	int	y;
+	int		width;
+	int		height;
 }	t_sprite;
 
-typedef struct	s_animate
+typedef struct s_animate
 {
 	void	*ptr1;
 	void	*ptr2;
 	void	*ptr3;
 	void	*ptr4;
-	int	width;
-	int	height;
+	int		width;
+	int		height;
 }	t_animate;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	void	*u_ptr;
 	void	*d_ptr;
 	void	*r_ptr;
 	void	*l_ptr;
-	int	width;
-	int	height;
-	int	x;
-	int	y;
-	int	direction;
-	int	move_count;
+	int		width;
+	int		height;
+	int		x;
+	int		y;
+	int		direction;
+	int		move_count;
 }	t_player;
-
-typedef struct	s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int	bpp;
-	int	line_len; /*in bytes*/
-	int	endian;
-}	t_img;
 
 typedef struct s_data
 {
-	void	*mlx_connection;
-	t_win	win;
-	t_img	img;
-	t_map	map;
-	t_sprite	space1;
-	t_sprite	space2;
-	t_sprite	space3;
-	t_sprite	space4;
+	void		*mlx_connection;
+	t_win		win;
+	int			config_stage;
+	t_map		map;
+	t_animate	space;
+	t_animate	star;
+	t_player	astronaut;
 	t_sprite	asteroid;
 	t_sprite	portal;
 	t_sprite	block_exit;
-	t_animate	star;
-	t_player	astronaut;
 	t_sprite	move_display;
 	t_sprite	star_display;
 }	t_data;
 
 /*Main function calls*/
-void	read_map(int argc, t_map *map);
+void	read_map(int argc, t_data *game);
 void	validate_map_content(t_data *game);
 void	check_valid_path(t_data *game);
 void	initiate_game(t_data *game);
 
 /*Hook events*/
-int	key_hook(int keysym, t_data *game);
-int	render_hook(t_data *game);
+int		key_hook(int keysym, t_data *game);
+int		render_hook(t_data *game);
+void	render_game(t_data *game, int x, int y);
 
 /*Utils - Render functions*/
-void	render_game(t_data *game, int x, int y);
+void	render_space(t_data *game, int x, int y);
+void	render_wall(t_data *game, int x, int y);
+void	render_collectible(t_data *game, int x, int y);
+void	render_astronaut(t_data *game, int x, int y);
+void	display_on_screen(t_data *game);
 
 /*Utils - Move functions*/
 void	move_up(t_data *game, t_player *astronaut);
@@ -164,12 +153,12 @@ void	free_map(t_map *map);
 void	free_sprites_background(t_data *game);
 void	free_sprites_items(t_data *game);
 void	free_sprites_player(t_data *game);
-
+int		end_game(t_data *game);
 /*Close window functions*/
-void	handle_error(int stage, int perror, char *error_msg, t_data *game);
-int	close_window(t_data *game);
+void	handle_error(int perror, char *error_msg, t_data *game);
+//int	close_window(t_data *game);
 //void	img_pix_put(t_img *img, int x, int y, int color);
-void	end_mlx_connection(t_data *game);
+//void	end_mlx_connection(t_data *game);
 //int	esc_win(int keysym, t_data *data);
 
 #endif

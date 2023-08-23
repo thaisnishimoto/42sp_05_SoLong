@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:15 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 10:26:05 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:09:09 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	free_map(t_map *map)
 
 void	free_sprites_background(t_data *game)
 {
-	if (game->space1.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->space1.ptr);
-	if (game->space2.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->space2.ptr);
-	if (game->space3.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->space3.ptr);
-	if (game->space4.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->space4.ptr);
+	if (game->space.ptr1 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->space.ptr1);
+	if (game->space.ptr2 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->space.ptr2);
+	if (game->space.ptr3 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->space.ptr3);
+	if (game->space.ptr4 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->space.ptr4);
 	if (game->asteroid.ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->asteroid.ptr);
 	if (game->move_display.ptr != NULL)

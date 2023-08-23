@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_events.c                                      :+:      :+:    :+:   */
+/*   hook_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:39:04 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/22 16:53:35 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:37:50 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	key_hook(int keysym, t_data *game)
 	if (keysym == XK_Left || keysym == XK_a)
 		move_left(game, &game->astronaut);
 	if (keysym == XK_Escape)
-		close_window(game);
+		end_game(game);
 	return (0);
 }
 
@@ -46,4 +46,23 @@ int	render_hook(t_data *game)
 		y++;
 	}
 	return (0);
+}
+
+void	render_game(t_data *game, int x, int y)
+{
+	if (game->map.grid[y][x] == '0')
+		render_space(game, x, y);
+	if (game->map.grid[y][x] == '1')
+		render_wall(game, x, y);
+	if (game->map.grid[y][x] == 'C')
+		render_collectible(game, x, y);
+	if (game->map.grid[y][x] == 'E')
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->portal.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	if (game->map.grid[y][x] == 'P')
+		render_astronaut(game, x, y);
+	if (game->map.grid[y][x] == 'B')
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->block_exit.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	display_on_screen(game);
 }
