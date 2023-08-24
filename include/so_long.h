@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 14:45:01 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:40:31 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct s_sprite
 	char	*path;
 	int		width;
 	int		height;
+	int		x;
+	int		y;
 }	t_sprite;
 
 typedef struct s_animate

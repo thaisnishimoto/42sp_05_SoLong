@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:37:20 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 14:25:17 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:25:33 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,24 @@
 
 static void	handle_next_step(t_data *game, t_player *astronaut, int x, int y)
 {
+	astronaut->move_count++;
+	game->map.grid[astronaut->y][astronaut->x] = '0';
 	if (game->map.grid[y][x] == 'C')
 		game->map.collect_count--;
+	if (game->map.collect_count == 0)
+		game->map.grid[game->portal.y][game->portal.x] = 'E';
 	if (game->map.grid[y][x] == 'E')
 	{
-		game->map.grid[astronaut->y][astronaut->x] = '0';
-		game->map.grid[y][x] = 'B';
-		if (game->map.collect_count == 0)
-		{
-			astronaut->move_count++;
-			ft_printf("YOU WIN!!!\n");
-			end_game(game);
-		}
-		ft_printf("Stars left to collect: %d\n", game->map.collect_count);
-		return ;
+		game->map.grid[y][x] = 'W';
+		game->ending = 1;
+		end_game(game);
 	}
 	if (game->map.grid[y][x] == 'H')
 	{
-		game->map.grid[astronaut->y][astronaut->x] = '0';
 		game->map.grid[y][x] = 'L';
-		astronaut->move_count++;
 		game->ending = 2;
 		end_game(game);
 	}
-	if (game->map.grid[astronaut->y][astronaut->x] == 'B')
-		game->map.grid[astronaut->y][astronaut->x] = 'E';
-	else
-		game->map.grid[astronaut->y][astronaut->x] = '0';
 	game->map.grid[y][x] = 'P';
 }
 
@@ -56,7 +47,6 @@ void	move_up(t_data *game, t_player *astronaut)
 	{
 		handle_next_step(game, astronaut, x, y);
 		astronaut->y--;
-		astronaut->move_count++;
 	}
 }
 
@@ -72,7 +62,6 @@ void	move_down(t_data *game, t_player *astronaut)
 	{
 		handle_next_step(game, astronaut, x, y);
 		astronaut->y++;
-		astronaut->move_count++;
 	}
 }
 
@@ -88,7 +77,6 @@ void	move_right(t_data *game, t_player *astronaut)
 	{
 		handle_next_step(game, astronaut, x, y);
 		astronaut->x++;
-		astronaut->move_count++;
 	}
 }
 
@@ -104,6 +92,5 @@ void	move_left(t_data *game, t_player *astronaut)
 	{
 		handle_next_step(game, astronaut, x, y);
 		astronaut->x--;
-		astronaut->move_count++;
 	}
 }
