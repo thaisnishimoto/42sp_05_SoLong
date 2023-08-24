@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 17:31:25 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:45:01 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define HOLE1 "./images/black_hole_s.xpm"
 # define HOLE2 "./images/black_hole_m.xpm"
 # define HOLE3 "./images/black_hole_b.xpm"
+# define HOLE4 "./images/black_hole_lose.xpm"
+# define GOVER "./images/game_over.xpm"
 
 /*Structs*/
 typedef struct s_map
@@ -116,6 +118,7 @@ typedef struct s_data
 	void		*mlx_connection;
 	t_win		win;
 	int			config_stage;
+	int			ending;
 	t_map		map;
 	t_animate	space;
 	t_animate	star;
@@ -126,6 +129,7 @@ typedef struct s_data
 	t_sprite	move_display;
 	t_sprite	star_display;
 	t_animate	hole;
+	t_sprite	game_over;
 }	t_data;
 
 /*Main function calls*/

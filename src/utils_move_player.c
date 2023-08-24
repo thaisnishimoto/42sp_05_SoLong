@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:37:20 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 17:35:21 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:25:17 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ static void	handle_next_step(t_data *game, t_player *astronaut, int x, int y)
 	}
 	if (game->map.grid[y][x] == 'H')
 	{
+		game->map.grid[astronaut->y][astronaut->x] = '0';
+		game->map.grid[y][x] = 'L';
 		astronaut->move_count++;
-		ft_printf("GAME OVER!!!\n");
+		game->ending = 2;
 		end_game(game);
 	}
 	if (game->map.grid[astronaut->y][astronaut->x] == 'B')

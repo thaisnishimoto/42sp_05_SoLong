@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:15 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 17:31:04 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:46:58 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ void	free_sprites_items(t_data *game)
 		mlx_destroy_image(game->mlx_connection, game->hole.ptr2);
 	if (game->hole.ptr3 != NULL)
 		mlx_destroy_image(game->mlx_connection, game->hole.ptr3);
+	if (game->hole.ptr4 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->hole.ptr4);
+	if (game->game_over.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->game_over.ptr);
 }
 
 void	free_sprites_player(t_data *game)

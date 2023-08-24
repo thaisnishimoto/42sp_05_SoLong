@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:08 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 17:30:45 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:49:05 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ static void	init_sprites_items(t_data *game)
 			&game->hole.width, &game->hole.height);
 	game->hole.ptr3 = mlx_xpm_file_to_image(game->mlx_connection, HOLE3,
 			&game->hole.width, &game->hole.height);
+	game->hole.ptr4 = mlx_xpm_file_to_image(game->mlx_connection, HOLE4,
+			&game->hole.width, &game->hole.height);
+	game->game_over.ptr = mlx_xpm_file_to_image(game->mlx_connection, GOVER,
+			&game->game_over.width, &game->game_over.height);
 }
 
 static void	init_sprites_player(t_data *game)
@@ -100,7 +104,8 @@ void	initiate_game(t_data *game)
 		|| game->block_exit.ptr == NULL || game->astronaut.u_ptr == NULL
 		|| game->astronaut.d_ptr == NULL || game->astronaut.r_ptr == NULL
 		|| game->astronaut.l_ptr == NULL || game->hole.ptr1 == NULL
-		|| game->hole.ptr2 == NULL || game-> hole.ptr3 == NULL)
+		|| game->hole.ptr2 == NULL || game-> hole.ptr3 == NULL
+		|| game->hole.ptr4 == NULL || game->game_over.ptr == NULL)
 		handle_error(0, "XPM image loading failed!\n", game);
 	init_window(game);
 	game->config_stage = 4;
