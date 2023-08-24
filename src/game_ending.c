@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:37:22 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 14:57:05 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:57:35 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,19 @@ int	end_game(t_data *game)
 	int	i;
 
 	i = 0;
+	if (game->ending == 1)
+	{
+		render_hook(game);
+		while (i++  < REPEAT_FRAME * 1000)
+			mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+				game->you_win.ptr, game->map.columns * .45 * TILE_SIZE, 0);
+	}
 	if (game->ending == 2)
 	{
 		render_hook(game);
 		while (i++  < REPEAT_FRAME * 1000)
 			mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-				game->game_over.ptr, game->map.columns * .45 * TILE_SIZE, TILE_SIZE);
+				game->game_over.ptr, game->map.columns * .45 * TILE_SIZE, 0);
 	}
 	if (game->win.mlx_win)
 		close_window(game);

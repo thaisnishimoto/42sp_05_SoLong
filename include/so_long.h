@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 15:40:31 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:54:38 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define SPACE4 "./images/space_frame4.xpm"
 # define ASTEROID "./images/asteroid.xpm"
 # define PORTAL "./images/portal.xpm"
-# define BLOCK_E "./images/blocked_exit.xpm"
+# define PORTAL_W "./images/portal_win.xpm"
 # define STAR1 "./images/star1.xpm"
 # define STAR2 "./images/star2.xpm"
 # define STAR3 "./images/star3.xpm"
@@ -52,8 +52,9 @@
 # define HOLE1 "./images/black_hole_s.xpm"
 # define HOLE2 "./images/black_hole_m.xpm"
 # define HOLE3 "./images/black_hole_b.xpm"
-# define HOLE4 "./images/black_hole_lose.xpm"
+# define HOLE_L "./images/black_hole_lose.xpm"
 # define GOVER "./images/game_over.xpm"
+# define UWIN "./images/you_win.xpm"
 
 /*Structs*/
 typedef struct s_map
@@ -131,6 +132,8 @@ typedef struct s_data
 	t_sprite	move_display;
 	t_sprite	star_display;
 	t_animate	hole;
+	t_sprite	portal_win;
+	t_sprite	you_win;
 	t_sprite	game_over;
 }	t_data;
 
