@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:12:58 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 16:06:34 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:30:19 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,27 @@ void	render_wall(t_data *game, int x, int y)
 	else
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->asteroid.ptr, x * TILE_SIZE, y * TILE_SIZE);
+}
+
+void	render_black_hole(t_data *game, int x, int y)
+{
+	static int	i;
+
+	if (i >= 0 && i <= REPEAT_FRAME)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->hole.ptr1, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME && i <= REPEAT_FRAME * 2)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->hole.ptr2, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME * 2 && i <= REPEAT_FRAME * 3)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->hole.ptr3, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME * 3 && i <= REPEAT_FRAME * 4)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->hole.ptr2, x * TILE_SIZE, y * TILE_SIZE);
+	if (i > REPEAT_FRAME * 4)
+		i = 0;
+	i++;
 }
 
 void	render_collectible(t_data *game, int x, int y)

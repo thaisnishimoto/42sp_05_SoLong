@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:08 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 16:08:08 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:30:45 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static void	init_sprites_background(t_data *game)
 			&game->space.width, &game->space.height);
 	game->asteroid.ptr = mlx_xpm_file_to_image(game->mlx_connection, ASTEROID,
 			&game->asteroid.width, &game->asteroid.height);
+	game->portal.ptr = mlx_xpm_file_to_image(game->mlx_connection, PORTAL,
+			&game->portal.width, &game->portal.height);
+	game->block_exit.ptr = mlx_xpm_file_to_image(game->mlx_connection, BLOCK_E,
+			&game->block_exit.width, &game->block_exit.height);
 	game->move_display.ptr = mlx_xpm_file_to_image(game->mlx_connection, MOVES,
 			&game->move_display.width, &game->move_display.height);
 	game->star_display.ptr = mlx_xpm_file_to_image(game->mlx_connection, COLLEC,
@@ -40,10 +44,12 @@ static void	init_sprites_items(t_data *game)
 			&game->star.width, &game->star.height);
 	game->star.ptr4 = mlx_xpm_file_to_image(game->mlx_connection, STAR4,
 			&game->star.width, &game->star.height);
-	game->portal.ptr = mlx_xpm_file_to_image(game->mlx_connection, PORTAL,
-			&game->portal.width, &game->portal.height);
-	game->block_exit.ptr = mlx_xpm_file_to_image(game->mlx_connection, BLOCK_E,
-			&game->block_exit.width, &game->block_exit.height);
+	game->hole.ptr1 = mlx_xpm_file_to_image(game->mlx_connection, HOLE1,
+			&game->hole.width, &game->hole.height);
+	game->hole.ptr2 = mlx_xpm_file_to_image(game->mlx_connection, HOLE2,
+			&game->hole.width, &game->hole.height);
+	game->hole.ptr3 = mlx_xpm_file_to_image(game->mlx_connection, HOLE3,
+			&game->hole.width, &game->hole.height);
 }
 
 static void	init_sprites_player(t_data *game)
@@ -93,7 +99,8 @@ void	initiate_game(t_data *game)
 		|| game->star.ptr4 == NULL || game->portal.ptr == NULL
 		|| game->block_exit.ptr == NULL || game->astronaut.u_ptr == NULL
 		|| game->astronaut.d_ptr == NULL || game->astronaut.r_ptr == NULL
-		|| game->astronaut.l_ptr == NULL)
+		|| game->astronaut.l_ptr == NULL || game->hole.ptr1 == NULL
+		|| game->hole.ptr2 == NULL || game-> hole.ptr3 == NULL)
 		handle_error(0, "XPM image loading failed!\n", game);
 	init_window(game);
 	game->config_stage = 4;

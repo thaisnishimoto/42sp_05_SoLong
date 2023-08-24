@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:15 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 16:09:09 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:31:04 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	free_sprites_background(t_data *game)
 		mlx_destroy_image(game->mlx_connection, game->space.ptr4);
 	if (game->asteroid.ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->asteroid.ptr);
+	if (game->portal.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->portal.ptr);
+	if (game->block_exit.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->block_exit.ptr);
 	if (game->move_display.ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->move_display.ptr);
 	if (game->star_display.ptr != NULL)
@@ -53,10 +57,12 @@ void	free_sprites_items(t_data *game)
 		mlx_destroy_image(game->mlx_connection, game->star.ptr3);
 	if (game->star.ptr4 != NULL)
 		mlx_destroy_image(game->mlx_connection, game->star.ptr4);
-	if (game->portal.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->portal.ptr);
-	if (game->block_exit.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->block_exit.ptr);
+	if (game->hole.ptr1 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->hole.ptr1);
+	if (game->hole.ptr2 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->hole.ptr2);
+	if (game->hole.ptr3 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->hole.ptr3);
 }
 
 void	free_sprites_player(t_data *game)

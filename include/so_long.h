@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 16:04:41 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:31:25 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define SPACE3 "./images/space_frame3.xpm"
 # define SPACE4 "./images/space_frame4.xpm"
 # define ASTEROID "./images/asteroid.xpm"
-# define PORTAL "./images/portal transcendence.xpm"
+# define PORTAL "./images/portal.xpm"
 # define BLOCK_E "./images/blocked_exit.xpm"
 # define STAR1 "./images/star1.xpm"
 # define STAR2 "./images/star2.xpm"
@@ -49,6 +49,9 @@
 # define ASTRO_D "./images/astronaut_down.xpm"
 # define MOVES "./images/moves_display.xpm"
 # define COLLEC "./images/star_display.xpm"
+# define HOLE1 "./images/black_hole_s.xpm"
+# define HOLE2 "./images/black_hole_m.xpm"
+# define HOLE3 "./images/black_hole_b.xpm"
 
 /*Structs*/
 typedef struct s_map
@@ -122,6 +125,7 @@ typedef struct s_data
 	t_sprite	block_exit;
 	t_sprite	move_display;
 	t_sprite	star_display;
+	t_animate	hole;
 }	t_data;
 
 /*Main function calls*/
@@ -140,6 +144,7 @@ void	render_space(t_data *game, int x, int y);
 void	render_wall(t_data *game, int x, int y);
 void	render_collectible(t_data *game, int x, int y);
 void	render_astronaut(t_data *game, int x, int y);
+void	render_black_hole(t_data *game, int x, int y);
 void	display_on_screen(t_data *game);
 
 /*Utils - Move functions*/
@@ -154,11 +159,8 @@ void	free_sprites_background(t_data *game);
 void	free_sprites_items(t_data *game);
 void	free_sprites_player(t_data *game);
 int		end_game(t_data *game);
+
 /*Close window functions*/
 void	handle_error(int perror, char *error_msg, t_data *game);
-//int	close_window(t_data *game);
-//void	img_pix_put(t_img *img, int x, int y, int color);
-//void	end_mlx_connection(t_data *game);
-//int	esc_win(int keysym, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:37:20 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 12:54:16 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:35:21 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ static void	handle_next_step(t_data *game, t_player *astronaut, int x, int y)
 		}
 		ft_printf("Stars left to collect: %d\n", game->map.collect_count);
 		return ;
+	}
+	if (game->map.grid[y][x] == 'H')
+	{
+		astronaut->move_count++;
+		ft_printf("GAME OVER!!!\n");
+		end_game(game);
 	}
 	if (game->map.grid[astronaut->y][astronaut->x] == 'B')
 		game->map.grid[astronaut->y][astronaut->x] = 'E';

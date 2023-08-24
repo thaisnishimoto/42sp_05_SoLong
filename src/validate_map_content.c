@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:35:25 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 15:42:06 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:48:16 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	parse_map(t_data *game)
 				game->map.collect_count++;
 			else if (game->map.grid[y][x] == 'E')
 				game->map.exit_count++;
-			else if (ft_strchr("01CEPX", game->map.grid[y][x]) == NULL)
+			else if (ft_strchr("01CEPXH", game->map.grid[y][x]) == NULL)
 				handle_error(0, "Map with invalid component!\n", game);
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:39:04 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 15:37:50 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:46:24 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void	render_game(t_data *game, int x, int y)
 	if (game->map.grid[y][x] == 'B')
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->block_exit.ptr, x * TILE_SIZE, y * TILE_SIZE);
+	if (game->map.grid[y][x] == 'H')
+		render_black_hole(game, x, y);
 	display_on_screen(game);
 }
