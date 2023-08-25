@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 11:27:23 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:53:32 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <X11/keysym.h>
 # include <X11/X.h> //keypress, mask
 # include "../libft/libft.h" //my libft
-# include <stdio.h> //prinft
 # include <stdlib.h> //malloc, free
 # include <unistd.h> //write, read
 # include <fcntl.h> //open, close
@@ -53,7 +52,9 @@
 
 /*Sprites - ending and enemy*/
 # define UWIN "./images/you_win.xpm"
-# define PORTAL_W "./images/portal_win.xpm"
+# define WIN1 "./images/win_portal1.xpm"
+# define WIN2 "./images/win_portal2.xpm"
+# define WIN3 "./images/win_portal3.xpm"
 # define GOVER "./images/game_over.xpm"
 # define HOLE1 "./images/black_hole_s.xpm"
 # define HOLE2 "./images/black_hole_m.xpm"
@@ -138,7 +139,7 @@ typedef struct s_data
 	t_animate	hole;
 	t_animate	lose_hole;
 	t_sprite	game_over;
-	t_sprite	win_portal;
+	t_animate	win_portal;
 	t_sprite	you_win;
 }	t_data;
 
@@ -177,7 +178,7 @@ void	free_sprites_collectible_and_player(t_data *game);
 void	free_sprites_ending_and_enemy(t_data *game);
 
 /*Ending functions*/
-void	handle_error(int perror, char *error_msg, t_data *game);
 int		end_game(t_data *game);
+void	handle_error(int perror, char *error_msg, t_data *game);
 
 #endif

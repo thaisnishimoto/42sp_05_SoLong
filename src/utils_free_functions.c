@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:15 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 00:33:15 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:37:15 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,12 @@ void	free_sprites_ending_and_enemy(t_data *game)
 {
 	if (game->you_win.ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->you_win.ptr);
-	if (game->win_portal.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->win_portal.ptr);
+	if (game->win_portal.ptr1 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->win_portal.ptr1);
+	if (game->win_portal.ptr2 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->win_portal.ptr2);
+	if (game->win_portal.ptr3 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->win_portal.ptr3);
 	if (game->game_over.ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->game_over.ptr);
 	if (game->hole.ptr1 != NULL)

@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 00:08:35 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 11:25:04 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:38:54 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,21 @@ void	display_on_screen(t_data *game)
 
 void	render_victory_ending(t_data *game, int x, int y)
 {
+	int	i;
+
+	i = 0;
 	render_hook(game);
 	mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-		game->win_portal.ptr, x * TILE_SIZE, y * TILE_SIZE);
+		game->you_win.ptr, game->map.columns * .42 * TILE_SIZE, 0);
+	while (i++ <= REPEAT_FRAME * 300)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->win_portal.ptr1, x * TILE_SIZE, y * TILE_SIZE);
+	while (i > REPEAT_FRAME * 300 && i++ <= REPEAT_FRAME * 600)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->win_portal.ptr2, x * TILE_SIZE, y * TILE_SIZE);
+	while (i > REPEAT_FRAME * 600 && i++ <= REPEAT_FRAME * 900)
+		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
+			game->win_portal.ptr3, x * TILE_SIZE, y * TILE_SIZE);
 }
 
 void	render_lose_ending(t_data *game, int x, int y)

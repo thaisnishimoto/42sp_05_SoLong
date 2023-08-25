@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:08 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 00:32:28 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:36:32 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,11 @@ static void	init_sprites_ending_and_enemy(t_data *game)
 {
 	game->you_win.ptr = mlx_xpm_file_to_image(game->mlx_connection, UWIN,
 			&game->you_win.width, &game->you_win.height);
-	game->win_portal.ptr = mlx_xpm_file_to_image(game->mlx_connection, PORTAL_W,
+	game->win_portal.ptr1 = mlx_xpm_file_to_image(game->mlx_connection, WIN1,
+			&game->win_portal.width, &game->win_portal.height);
+	game->win_portal.ptr2 = mlx_xpm_file_to_image(game->mlx_connection, WIN2,
+			&game->win_portal.width, &game->win_portal.height);
+	game->win_portal.ptr3 = mlx_xpm_file_to_image(game->mlx_connection, WIN3,
 			&game->win_portal.width, &game->win_portal.height);
 	game->game_over.ptr = mlx_xpm_file_to_image(game->mlx_connection, GOVER,
 			&game->game_over.width, &game->game_over.height);
@@ -109,7 +113,8 @@ void	initiate_game(t_data *game)
 		|| game->star.ptr3 == NULL || game->star.ptr4 == NULL
 		|| game->astronaut.u_ptr == NULL || game->astronaut.d_ptr == NULL
 		|| game->astronaut.r_ptr == NULL || game->astronaut.l_ptr == NULL
-		|| game->you_win.ptr == NULL || game->win_portal.ptr == NULL
+		|| game->you_win.ptr == NULL || game->win_portal.ptr1 == NULL
+		|| game->win_portal.ptr2 == NULL || game->win_portal.ptr3 == NULL
 		|| game->game_over.ptr == NULL || game->hole.ptr1 == NULL
 		|| game->hole.ptr2 == NULL || game-> hole.ptr3 == NULL
 		|| game->lose_hole.ptr1 == NULL || game->lose_hole.ptr2 == NULL

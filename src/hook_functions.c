@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:39:04 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 00:15:40 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:50:14 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,5 @@ void	render_game(t_data *game, int x, int y)
 		render_astronaut(game, x, y);
 	if (game->map.grid[y][x] == 'H')
 		render_black_hole(game, x, y);
-	if (game->map.grid[y][x] == 'W')
-		render_victory_ending(game, x, y);
-	if (game->map.grid[y][x] == 'L')
-		render_lose_ending(game, x, y);
 	display_on_screen(game);
 }
