@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:37:22 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 12:53:21 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:50:29 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	end_game(t_data *game)
 	end_mlx_connection(game);
 	if (game->config_stage < 4)
 		return (1);
-	exit (0);
+	exit (EXIT_SUCCESS);
 }
 
 void	handle_error(int error_type, char *error_msg, t_data *game)
@@ -49,8 +49,8 @@ void	handle_error(int error_type, char *error_msg, t_data *game)
 	{
 		ft_printf("%s", error_msg);
 		perror("");
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 	ft_printf("Error\n%s", error_msg);
-	exit (1);
+	exit (EXIT_FAILURE);
 }
