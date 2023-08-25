@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/thaisnishimoto/42-project-badges/blob/main/badges/so_longm.png" alt="SoLong bonus"/>
+</p>
+
 <h1 align=center>
 	<b>So Long</b>
 </h1>
@@ -12,7 +16,52 @@ Finished: ___<br>
 Grade: ___/100
 
 <h2>
-Introduction
+Installation
+</h2>
+
+1. Clone the repository
+```sh
+git clone git@github.com:thaisnishimoto/42sp_05_SoLong.git
+```
+
+2. Compile the game
+```sh
+make
+```
+
+3. Run the game with the a map file from the maps directory 
+```sh
+make run MAP=<map_filename.ber>
+```
+
+<h2>
+Usage
+</h2>
+### Game commands:
+
+### To create a valid map, it must:
+- be in format *.ber
+- be rectangular
+- be surrounded by walls
+- have a valid path to the exit and collectibles
+- contain only these 6 characters:
+'0' for empty space
+1 for wall
+C for collectible (at least one)
+E for map exit (one only)
+P for player’s starting position (one only)
+H for enemy
+
+<h2>
+You Win - example:
+</h2>
+
+<h2>
+Game Over - example:
+</h2>
+
+<h2>
+Minilibx
 </h2>
 
 Linux can be managed through the command line interface. However, most end users prefere using a graphical user interface (GUI).<br>
@@ -28,9 +77,5 @@ It allows to run applications on windows, move windows around the screen and cli
 - The Desktop Environment (optional) adds tools and utilities such as start menu, taskbar, icons, screen locker, etc. It dictates how the GUI looks.
 
 MiniLibX is a library based on Xlib, which contains functions for interacting with an X server. It is meant for beginners to learn the basics of graphics development.
-
-https://qst0.github.io/ft_libgfx/man_mlx_loop.html
-
-https://piiixl.itch.io/space
 https://www.aconvert.com/image/#google_vignette
 https://elliotjermy.itch.io/up940183-meteor-defence
