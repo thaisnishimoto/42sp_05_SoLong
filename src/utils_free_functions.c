@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:15 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 16:55:02 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:33:15 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,7 @@ void	free_sprites_background(t_data *game)
 		mlx_destroy_image(game->mlx_connection, game->star_display.ptr);
 }
 
-void	free_sprites_items(t_data *game)
-{
-	if (game->hole.ptr1 != NULL)
-		mlx_destroy_image(game->mlx_connection, game->hole.ptr1);
-	if (game->hole.ptr2 != NULL)
-		mlx_destroy_image(game->mlx_connection, game->hole.ptr2);
-	if (game->hole.ptr3 != NULL)
-		mlx_destroy_image(game->mlx_connection, game->hole.ptr3);
-	if (game->hole.ptr4 != NULL)
-		mlx_destroy_image(game->mlx_connection, game->hole.ptr4);
-	if (game->portal_win.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->portal_win.ptr);
-	if (game->you_win.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->you_win.ptr);
-	if (game->game_over.ptr != NULL)
-		mlx_destroy_image(game->mlx_connection, game->game_over.ptr);
-}
-
-void	free_sprites_player(t_data *game)
+void	free_sprites_collectible_and_player(t_data *game)
 {
 	if (game->star.ptr1 != NULL)
 		mlx_destroy_image(game->mlx_connection, game->star.ptr1);
@@ -81,4 +63,26 @@ void	free_sprites_player(t_data *game)
 		mlx_destroy_image(game->mlx_connection, game->astronaut.r_ptr);
 	if (game->astronaut.l_ptr != NULL)
 		mlx_destroy_image(game->mlx_connection, game->astronaut.l_ptr);
+}
+
+void	free_sprites_ending_and_enemy(t_data *game)
+{
+	if (game->you_win.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->you_win.ptr);
+	if (game->win_portal.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->win_portal.ptr);
+	if (game->game_over.ptr != NULL)
+		mlx_destroy_image(game->mlx_connection, game->game_over.ptr);
+	if (game->hole.ptr1 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->hole.ptr1);
+	if (game->hole.ptr2 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->hole.ptr2);
+	if (game->hole.ptr3 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->hole.ptr3);
+	if (game->lose_hole.ptr1 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->lose_hole.ptr1);
+	if (game->lose_hole.ptr2 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->lose_hole.ptr2);
+	if (game->lose_hole.ptr3 != NULL)
+		mlx_destroy_image(game->mlx_connection, game->lose_hole.ptr3);
 }

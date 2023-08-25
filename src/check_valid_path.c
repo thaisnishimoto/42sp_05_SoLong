@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:10:01 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/23 15:07:03 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:16:56 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	allocate_flag_grid(t_data *game, t_map *seen_flag)
 		if (seen_flag->grid[y] == NULL)
 		{
 			y--;
-			while (y > 0)
+			while (y >= 0)
 				free(seen_flag->grid[y--]);
 			free(seen_flag->grid);
 			handle_error(1, "Error\n", game);
@@ -72,6 +72,7 @@ static char	tile_is_valid(t_data *game, int x, int y, t_map *seen_flag)
 }
 
 /*Check neighbor tiles in order: up(0.-1), right(1.0), down(0. 1), left(-1.0)*/
+/*Direction struct initialized using compound literal*/
 /*Look every tile using Depth First Search Algorithm*/
 void	check_neighbors(t_data *game, int curr_x, int curr_y, t_map *seen_flag)
 {

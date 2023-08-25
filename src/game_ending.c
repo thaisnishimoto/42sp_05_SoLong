@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:37:22 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 16:57:35 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:26:21 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,14 @@ void	end_mlx_connection(t_data *game)
 
 int	end_game(t_data *game)
 {
-	int	i;
-
-	i = 0;
-	if (game->ending == 1)
-	{
-		render_hook(game);
-		while (i++  < REPEAT_FRAME * 1000)
-			mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-				game->you_win.ptr, game->map.columns * .45 * TILE_SIZE, 0);
-	}
-	if (game->ending == 2)
-	{
-		render_hook(game);
-		while (i++  < REPEAT_FRAME * 1000)
-			mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-				game->game_over.ptr, game->map.columns * .45 * TILE_SIZE, 0);
-	}
 	if (game->win.mlx_win)
 		close_window(game);
 	free_map(&game->map);
 	free_sprites_background(game);
-	free_sprites_items(game);
-	free_sprites_player(game);
+	free_sprites_collectible_and_player(game);
+	free_sprites_ending_and_enemy(game);
 	end_mlx_connection(game);
 	if (game->config_stage < 4)
 		return (1);
-	exit (0);}
+	exit (0);
+}

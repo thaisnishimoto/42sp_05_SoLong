@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:07 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 16:54:38 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:27:23 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@
 #  define REPEAT_FRAME 90
 # endif
 
-/*Sprites*/
+/*Sprites - brackground*/
 # define SPACE1 "./images/space_frame1.xpm"
 # define SPACE2 "./images/space_frame2.xpm"
 # define SPACE3 "./images/space_frame3.xpm"
 # define SPACE4 "./images/space_frame4.xpm"
 # define ASTEROID "./images/asteroid.xpm"
 # define PORTAL "./images/portal.xpm"
-# define PORTAL_W "./images/portal_win.xpm"
+# define MOVES "./images/moves_display.xpm"
+# define COLLEC "./images/star_display.xpm"
+
+/*Sprites - collectible and player*/
 # define STAR1 "./images/star1.xpm"
 # define STAR2 "./images/star2.xpm"
 # define STAR3 "./images/star3.xpm"
@@ -47,16 +50,26 @@
 # define ASTRO_R "./images/astronaut_right.xpm"
 # define ASTRO_L "./images/astronaut_left.xpm"
 # define ASTRO_D "./images/astronaut_down.xpm"
-# define MOVES "./images/moves_display.xpm"
-# define COLLEC "./images/star_display.xpm"
+
+/*Sprites - ending and enemy*/
+# define UWIN "./images/you_win.xpm"
+# define PORTAL_W "./images/portal_win.xpm"
+# define GOVER "./images/game_over.xpm"
 # define HOLE1 "./images/black_hole_s.xpm"
 # define HOLE2 "./images/black_hole_m.xpm"
 # define HOLE3 "./images/black_hole_b.xpm"
-# define HOLE_L "./images/black_hole_lose.xpm"
-# define GOVER "./images/game_over.xpm"
-# define UWIN "./images/you_win.xpm"
+# define LOSE1 "./images/lose_hole1.xpm"
+# define LOSE2 "./images/lose_hole2.xpm"
+# define LOSE3 "./images/lose_hole3.xpm"
 
 /*Structs*/
+typedef struct s_win
+{
+	void	*mlx_win;
+	int		width;
+	int		height;
+}	t_win;
+
 typedef struct s_map
 {
 	char	*file;
@@ -74,13 +87,6 @@ typedef struct s_dir
 	int	x[4];
 	int	y[4];
 }	t_dir;
-
-typedef struct s_win
-{
-	void	*mlx_win;
-	int		width;
-	int		height;
-}	t_win;
 
 typedef struct s_sprite
 {
@@ -121,20 +127,19 @@ typedef struct s_data
 	void		*mlx_connection;
 	t_win		win;
 	int			config_stage;
-	int			ending;
 	t_map		map;
 	t_animate	space;
-	t_animate	star;
-	t_player	astronaut;
 	t_sprite	asteroid;
 	t_sprite	portal;
-	t_sprite	block_exit;
 	t_sprite	move_display;
 	t_sprite	star_display;
+	t_animate	star;
+	t_player	astronaut;
 	t_animate	hole;
-	t_sprite	portal_win;
-	t_sprite	you_win;
+	t_animate	lose_hole;
 	t_sprite	game_over;
+	t_sprite	win_portal;
+	t_sprite	you_win;
 }	t_data;
 
 /*Main function calls*/
@@ -153,8 +158,11 @@ void	render_space(t_data *game, int x, int y);
 void	render_wall(t_data *game, int x, int y);
 void	render_collectible(t_data *game, int x, int y);
 void	render_astronaut(t_data *game, int x, int y);
+void	render_exit(t_data *game, int x, int y);
 void	render_black_hole(t_data *game, int x, int y);
 void	display_on_screen(t_data *game);
+void	render_victory_ending(t_data *game, int x, int y);
+void	render_lose_ending(t_data *game, int x, int y);
 
 /*Utils - Move functions*/
 void	move_up(t_data *game, t_player *astronaut);
@@ -165,11 +173,11 @@ void	move_left(t_data *game, t_player *astronaut);
 /*Utils - Free functions*/
 void	free_map(t_map *map);
 void	free_sprites_background(t_data *game);
-void	free_sprites_items(t_data *game);
-void	free_sprites_player(t_data *game);
-int		end_game(t_data *game);
+void	free_sprites_collectible_and_player(t_data *game);
+void	free_sprites_ending_and_enemy(t_data *game);
 
-/*Close window functions*/
+/*Ending functions*/
 void	handle_error(int perror, char *error_msg, t_data *game);
+int		end_game(t_data *game);
 
 #endif

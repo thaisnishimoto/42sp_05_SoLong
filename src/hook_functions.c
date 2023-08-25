@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:39:04 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 16:57:54 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 00:15:40 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,14 @@ void	render_game(t_data *game, int x, int y)
 	if (game->map.grid[y][x] == 'C')
 		render_collectible(game, x, y);
 	if (game->map.grid[y][x] == 'E')
-		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-			game->portal.ptr, x * TILE_SIZE, y * TILE_SIZE);
+		render_exit(game, x, y);
 	if (game->map.grid[y][x] == 'P')
 		render_astronaut(game, x, y);
 	if (game->map.grid[y][x] == 'H')
 		render_black_hole(game, x, y);
 	if (game->map.grid[y][x] == 'W')
-		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-			game->portal_win.ptr, x * TILE_SIZE, y * TILE_SIZE);
+		render_victory_ending(game, x, y);
 	if (game->map.grid[y][x] == 'L')
-		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-			game->hole.ptr4, x * TILE_SIZE, y * TILE_SIZE);
+		render_lose_ending(game, x, y);
 	display_on_screen(game);
 }

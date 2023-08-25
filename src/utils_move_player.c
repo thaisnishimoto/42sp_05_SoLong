@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:37:20 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/24 15:25:33 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:24:43 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ static void	handle_next_step(t_data *game, t_player *astronaut, int x, int y)
 		game->map.grid[game->portal.y][game->portal.x] = 'E';
 	if (game->map.grid[y][x] == 'E')
 	{
-		game->map.grid[y][x] = 'W';
-		game->ending = 1;
+		render_victory_ending(game, x, y);
 		end_game(game);
 	}
 	if (game->map.grid[y][x] == 'H')
 	{
-		game->map.grid[y][x] = 'L';
-		game->ending = 2;
+		render_lose_ending(game, x, y);
 		end_game(game);
 	}
 	game->map.grid[y][x] = 'P';
