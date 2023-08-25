@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:12:58 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 00:15:25 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:38:10 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	render_space(t_data *game, int x, int y)
 
 void	render_wall(t_data *game, int x, int y)
 {
-	if (x == 0 && y == 0)
+	if (x == game->map.columns - 1 && y == 0)
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->move_display.ptr, x * TILE_SIZE, y * TILE_SIZE);
-	else if (x == 0 && y == 1)
+	else if (x == game->map.columns - 1 && y == 1)
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->star_display.ptr, x * TILE_SIZE, y * TILE_SIZE);
 	else

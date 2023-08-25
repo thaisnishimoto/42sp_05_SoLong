@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 00:08:35 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 12:38:54 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:46:59 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,13 @@ void	display_on_screen(t_data *game)
 	char	*collect_count;
 	int		x;
 
-	if (game->astronaut.move_count < 10)
-		x = 29;
-	else
-		x = 26;
+	x = game->map.columns * TILE_SIZE - 36;
 	move_count = ft_itoa(game->astronaut.move_count);
 	collect_count = ft_itoa(game->map.collect_count);
 	mlx_string_put(game->mlx_connection, game->win.mlx_win,
-		x, 44, 0xFFFFFF, move_count);
+		x, 45, 0xFFFFFF, move_count);
 	mlx_string_put(game->mlx_connection, game->win.mlx_win,
-		29, 113, 0xFFFFFF, collect_count);
+		x, 113, 0xFFFFFF, collect_count);
 	free(move_count);
 	free(collect_count);
 }
@@ -60,7 +57,7 @@ void	render_victory_ending(t_data *game, int x, int y)
 	i = 0;
 	render_hook(game);
 	mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-		game->you_win.ptr, game->map.columns * .42 * TILE_SIZE, 0);
+		game->you_win.ptr, game->map.columns * .33 * TILE_SIZE, 0);
 	while (i++ <= REPEAT_FRAME * 300)
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->win_portal.ptr1, x * TILE_SIZE, y * TILE_SIZE);
@@ -79,7 +76,7 @@ void	render_lose_ending(t_data *game, int x, int y)
 	i = 0;
 	render_hook(game);
 	mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
-		game->game_over.ptr, game->map.columns * .42 * TILE_SIZE, 0);
+		game->game_over.ptr, game->map.columns * .33 * TILE_SIZE, 0);
 	while (i++ <= REPEAT_FRAME * 300)
 		mlx_put_image_to_window(game->mlx_connection, game->win.mlx_win,
 			game->lose_hole.ptr1, x * TILE_SIZE, y * TILE_SIZE);

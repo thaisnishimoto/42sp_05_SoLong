@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:08 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 15:38:03 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:27:02 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void	init_window(t_data *game)
 	int	screen_width;
 	int	screen_height;
 
+	game->win.mlx_win = NULL;
 	mlx_get_screen_size(game->mlx_connection, &screen_width, &screen_height);
 	game->win.width = game->map.columns * TILE_SIZE;
 	game->win.height = game->map.rows * TILE_SIZE;
@@ -120,7 +121,6 @@ void	initiate_game(t_data *game)
 		|| game->lose_hole.ptr1 == NULL || game->lose_hole.ptr2 == NULL
 		|| game->lose_hole.ptr3 == NULL)
 		handle_error(0, "XPM image loading failed!\n", game);
-	game->win.mlx_win = NULL;
 	init_window(game);
 	game->config_stage = 4;
 	game->map.grid[game->portal.y][game->portal.x] = '0';
