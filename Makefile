@@ -6,7 +6,7 @@
 #    By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 18:56:46 by tmina-ni          #+#    #+#              #
-#    Updated: 2023/08/22 00:29:26 by tmina-ni         ###   ########.fr        #
+#    Updated: 2023/08/25 00:24:01 by tmina-ni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ $(NAME): $(OBJ)
 run:
 	./$(NAME) $(MAP_PATH)$(MAP)
 
+bonus: all
 
 #--------------------LEAKS--------------------#
 
@@ -77,4 +78,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all libft bonus leak gdb run clean fclean re
+.PHONY: all libft bonus leak gdb run bonus clean fclean re
