@@ -6,7 +6,7 @@
 /*   By: tmina-ni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:08 by tmina-ni          #+#    #+#             */
-/*   Updated: 2023/08/25 14:22:25 by tmina-ni         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:38:03 by tmina-ni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void	initiate_game(t_data *game)
 		handle_error(0, "XPM image loading failed!\n", game);
 	game->win.mlx_win = NULL;
 	init_window(game);
+	game->config_stage = 4;
 	game->map.grid[game->portal.y][game->portal.x] = '0';
 }
