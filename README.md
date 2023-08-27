@@ -8,6 +8,8 @@
 
 <p align="center"><i>"This project is a very small 2D game. Its purpose is to make you work with textures, sprites, and some other very basic gameplay elements."</i></p>  
 
+![so_long_cover](https://github.com/thaisnishimoto/42sp_05_SoLong/assets/126536908/d04e988c-c832-425d-9aff-63c9a4b56857)
+
 <h2>
  Status
 </h2>
