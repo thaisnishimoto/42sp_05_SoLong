@@ -77,5 +77,8 @@ Game Over - demo:
 Minilibx
 </h2>
 
-MiniLibX is a library based on Xlib, which contains functions for interacting with an X server. It is meant for beginners to learn the basics of graphics development.
-It allows to run applications on windows, move windows around the screen and click on items.
+MiniLibX is a library based on Xlib meant for beginners to learn the basics of graphics development. It allows to run applications on windows, move windows around the screen and click on items. <br>
+It was used to develop this project. So, to run the game, you might need to install [MiniLibX](https://github.com/42Paris/minilibx-linux) on your machine:
+```sh
+sudo apt-get install gcc make xorg libxext-dev libbsd-dev
+```
